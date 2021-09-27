@@ -17,11 +17,9 @@ function solution04(m, arr) {
 
   for (let rt=0; rt<arr.length; rt++) {
     sum += arr[rt];
-
     while (sum > m) {
       sum -= arr[lt++];
     }
-
     answer += (rt - lt + 1);
   }
 
