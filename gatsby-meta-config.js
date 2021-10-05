@@ -8,7 +8,7 @@ module.exports = {
     twitter: ``, // Your Twitter account
     github: `bereal1995`, // Your GitHub account
     medium: ``, // Your Medium account
-    facebook: ``, // Your Facebook account
+    facebook: `01076181116`, // Your Facebook account
     linkedin: `효형-조-4688931bb`, // Your LinkedIn account
     instagram: `hhxdragon/`, // Your Instagram account
   },
@@ -25,7 +25,7 @@ module.exports = {
     buyMeACoffeeId: 'johh',
   },
   share: {
-    facebookAppId: '', // Add facebookAppId for using facebook share feature v3.2
+    facebookAppId: '1614404755565845', // Add facebookAppId for using facebook share feature v3.2
   },
   ga: '0', // Add your google analytics tranking ID
 }
