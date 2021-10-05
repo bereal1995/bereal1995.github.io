@@ -1,5 +1,4 @@
 export const shareToFacebook = (href, text) => {
-  console.log('window.FB',window.FB);
   window.FB.ui({
     method: 'share',
     mobile_iframe: true,
