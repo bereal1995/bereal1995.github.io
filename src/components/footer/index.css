@@ -1,0 +1,16 @@
+/**
+ * @light theme
+ */
+/**
+ * @dark theme
+ */
+.footer {
+  padding-top: 52px;
+  text-align: center;
+  font-size: 12px;
+}
+
+.footer a {
+  text-decoration: none !important;
+}
+/*# sourceMappingURL=index.css.map */

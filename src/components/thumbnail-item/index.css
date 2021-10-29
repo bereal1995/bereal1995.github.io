@@ -1,0 +1,27 @@
+/**
+ * @light theme
+ */
+/**
+ * @dark theme
+ */
+.thumbnail {
+  display: block;
+  margin-bottom: 12px;
+  padding: 4px;
+  padding-bottom: 12px;
+  -webkit-box-shadow: none;
+          box-shadow: none;
+  -webkit-transition: text-shadow 0.3s, opacity 0.4s;
+  transition: text-shadow 0.3s, opacity 0.4s;
+  opacity: 0;
+}
+
+.thumbnail p {
+  font-size: 90%;
+  line-height: 1.4;
+}
+
+.thumbnail.visible {
+  opacity: 1;
+}
+/*# sourceMappingURL=index.css.map */
