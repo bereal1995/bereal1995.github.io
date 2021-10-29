@@ -45,6 +45,7 @@
     "react-helmet": "^5.2.0",
     "react-switch": "^5.0.0",
     "react-typography": "^0.16.13",
+    "sass-loader": "^12.3.0",
     "smooth-scroll": "^16.0.0",
     "smoothscroll-polyfill": "^0.4.4",
     "typeface-catamaran": "0.0.54",
