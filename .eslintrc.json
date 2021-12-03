@@ -1,0 +1,23 @@
+{
+  "env": {
+    "browser": true,
+    "node": true
+  },
+  "parser": "@babel/eslint-parser",
+  "parserOptions": {
+    "ecmaFeatures": {
+        "jsx": true
+    }
+  },
+  "extends": ["plugin:prettier/recommended", "react", "prettier", "plugin:mdx/recommended"],
+  "rules": {"prettier/prettier": ["error", { "endOfLine": "auto" }], "react/prop-types": 0},
+  "settings": {
+    "react": {
+      "version": "detect"
+    },
+    "mdx/code-blocks": true,
+    "mdx/language-mapper": {}
+  },
+  "plugins": ["react"]
+}
+
