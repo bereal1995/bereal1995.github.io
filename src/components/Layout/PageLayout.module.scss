@@ -1,13 +1,7 @@
 .container {
-  // max-width: 650px;
+  max-width: 650px;
   padding: 0 1rem;
   margin: 0 auto;
-  a {
-    display: block;
-    padding: 10px;
-    text-decoration: none;
-    color: #000;
-  }
   --post-mb: 10px;
   --post-border-radius: 5px;
 }
