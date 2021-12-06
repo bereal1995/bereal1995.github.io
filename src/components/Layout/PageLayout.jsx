@@ -1,7 +1,6 @@
 import React from 'react';
-import * as style from './PageLayout.module.scss';
 
-const PageLayout = ({ pageTitle, children, title }) => {
+const PageLayout = ({ pageTitle, children, title, style }) => {
   return (
     <div className={style.container}>
       <main>{children}</main>

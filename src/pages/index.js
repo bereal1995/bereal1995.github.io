@@ -29,7 +29,7 @@ const Home = ({ data, location }) => {
   return (
     <>
       <Header />
-      <PageLayout pageTitle="HH Blog Posts" title={data.site.siteMetadata.title}>
+      <PageLayout pageTitle="HH Blog Posts" title={data.site.siteMetadata.title} style={style}>
         <CategoryList categories={categories} category={category} setCategory={onClickCategory} />
         <ul className={style.post_list}>
           {posts.map((node) => (
