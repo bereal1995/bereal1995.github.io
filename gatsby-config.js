@@ -3,12 +3,7 @@ module.exports = {
     title: 'hhxdragon',
   },
   plugins: [
-    {
-      resolve: `gatsby-plugin-sass`,
-      options: {
-        implementation: require('node-sass'),
-      },
-    },
+    'gatsby-plugin-sass',
     'gatsby-plugin-image',
     // {
     //   resolve: "gatsby-plugin-google-analytics",

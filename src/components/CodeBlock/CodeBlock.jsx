@@ -3,44 +3,45 @@ import * as styles from './CodeBlock.module.scss';
 import Highlight, { defaultProps } from 'prism-react-renderer';
 import theme from 'prism-react-renderer/themes/vsDark';
 
+// https://levelup.gitconnected.com/code-review-avoid-declaring-react-component-inside-parent-component-1768a645f523
+// 참고자료
+const CopyButton = (props) => {
+  const [text, setText] = useState('Copy');
+  return (
+    <button
+      className={styles.code_button}
+      onClick={() => {
+        navigator.clipboard.writeText(props.content);
+        setText('Copied!');
+        setTimeout(() => {
+          setText('Copy');
+        }, 1000);
+      }}
+    >
+      {text}
+    </button>
+  );
+};
+
+const PlayButton = (props) => {
+  const ableLanguageList = ['js', 'javascript'];
+  const getIsAbleButton = (language) => {
+    return ableLanguageList.some((item) => item === language);
+  };
+  const onClickPlay = () => {
+    eval(props.content);
+  };
+
+  if (!getIsAbleButton(props.language)) return null;
+  return (
+    <button onClick={onClickPlay} className={styles.code_button}>
+      play
+    </button>
+  );
+};
+
 const CodeBlock = ({ children, className }) => {
   const language = className.replace(/language-/, '');
-  const CopyButton = (props) => {
-    const [text, setText] = useState('Copy');
-    return (
-      <button
-        className={styles.code_button}
-        onClick={() => {
-          navigator.clipboard.writeText(props.content);
-          setText('Copied!');
-          setTimeout(() => {
-            setText('Copy');
-          }, 1000);
-        }}
-      >
-        {text}
-      </button>
-    );
-  };
-
-  const PlayButton = (props) => {
-    const ableLanguageList = ['js', 'javascript'];
-    const getIsAbleButton = (language) => {
-      return ableLanguageList.some((item) => item === language);
-    };
-    const onClickPlay = () => {
-      // eslint-disable-next-line no-new-func
-      const playFn = new Function(props.content);
-      playFn();
-    };
-
-    if (!getIsAbleButton(props.language)) return null;
-    return (
-      <button onClick={onClickPlay} className={styles.code_button}>
-        play
-      </button>
-    );
-  };
 
   return (
     <Highlight {...defaultProps} theme={theme} code={children} language={language}>
