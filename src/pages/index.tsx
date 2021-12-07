@@ -1,20 +1,51 @@
 import React, { useState, useEffect } from 'react';
-import * as style from './../components/Layout/PageLayout.module.scss';
+import * as style from './index.module.scss';
 import './../styles/index.scss';
 import { graphql, Link } from 'gatsby';
-import PageLayout from '../components/layout/PageLayout';
 import Header from '../components/header/Header';
 import { CategoryList } from '../components/category/CategoryList';
+import PageLayout from '../components/layout/PageLayout';
 
-const Home = ({ data, location }) => {
-  const [posts, setPosts] = useState(data.allMdx.nodes);
-  const [category, setCategory] = useState('All');
+type HomeProps = {
+  data: {
+    site: {
+      siteMetadata: {
+        title: string;
+      };
+    };
+    allFile: {
+      nodes: {
+        name: string;
+      }[];
+    };
+    allMdx: {
+      nodes: {
+        excerpt: string;
+        frontmatter: {
+          date: string;
+          title: string;
+          category: string;
+        };
+        id: string;
+        parent: {
+          modifiedTime: string;
+        };
+        slug: string;
+      }[];
+    };
+  };
+};
+
+const Home: React.FC<HomeProps> = (props) => {
+  const { data } = props;
+  const [posts, setPosts] = useState<HomeProps['data']['allMdx']['nodes']>(data.allMdx.nodes);
   const categories = data.allMdx.nodes.reduce((prev, current) => {
     const category = current.frontmatter.category;
     return prev.includes(category) ? prev : [...prev, category];
-  }, []);
+  }, [] as string[]);
+  const [category, setCategory] = useState<string>('All');
 
-  const onClickCategory = (category) => {
+  const onClickCategory = (category: string) => {
     setCategory(category);
   };
 
@@ -24,12 +55,12 @@ const Home = ({ data, location }) => {
     } else {
       setPosts(data.allMdx.nodes);
     }
-  }, [category]);
+  }, [category, data.allMdx.nodes]);
 
   return (
     <>
       <Header />
-      <PageLayout pageTitle="HH Blog Posts" title={data.site.siteMetadata.title} style={style}>
+      <PageLayout>
         <CategoryList categories={categories} category={category} setCategory={onClickCategory} />
         <ul className={style.post_list}>
           {posts.map((node) => (

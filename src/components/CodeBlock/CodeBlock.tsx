@@ -1,17 +1,28 @@
 import React, { useState } from 'react';
 import * as styles from './CodeBlock.module.scss';
-import Highlight, { defaultProps } from 'prism-react-renderer';
+import Highlight, { defaultProps, Language } from 'prism-react-renderer';
 import theme from 'prism-react-renderer/themes/vsDark';
+
+type CodeBlockProps = {
+  children: React.ReactChildren;
+  className: string;
+};
+
+type PlayButtonProps = {
+  content: any;
+  language: Language;
+};
 
 // https://levelup.gitconnected.com/code-review-avoid-declaring-react-component-inside-parent-component-1768a645f523
 // 참고자료
-const CopyButton = (props) => {
+const CopyButton = (content: any) => {
   const [text, setText] = useState('Copy');
+
   return (
     <button
       className={styles.code_button}
       onClick={() => {
-        navigator.clipboard.writeText(props.content);
+        navigator.clipboard.writeText(content);
         setText('Copied!');
         setTimeout(() => {
           setText('Copy');
@@ -23,16 +34,16 @@ const CopyButton = (props) => {
   );
 };
 
-const PlayButton = (props) => {
+const PlayButton: React.FC<PlayButtonProps> = ({ content, language }) => {
   const ableLanguageList = ['js', 'javascript'];
-  const getIsAbleButton = (language) => {
+  const getIsAbleButton = (language: string) => {
     return ableLanguageList.some((item) => item === language);
   };
   const onClickPlay = () => {
-    eval(props.content);
+    eval(content);
   };
 
-  if (!getIsAbleButton(props.language)) return null;
+  if (!getIsAbleButton(language)) return null;
   return (
     <button onClick={onClickPlay} className={styles.code_button}>
       play
@@ -40,11 +51,11 @@ const PlayButton = (props) => {
   );
 };
 
-const CodeBlock = ({ children, className }) => {
-  const language = className.replace(/language-/, '');
+const CodeBlock: React.FC<CodeBlockProps> = ({ children, className }) => {
+  const language = className.replace(/language-/, '') as Language;
 
   return (
-    <Highlight {...defaultProps} theme={theme} code={children} language={language}>
+    <Highlight {...defaultProps} theme={theme} code={children as string} language={language}>
       {({ className, style, tokens, getLineProps, getTokenProps }) => (
         <pre className={`${className} ${styles.container}`} style={{ ...style }}>
           <div className={styles.code_header}>
@@ -53,7 +64,7 @@ const CodeBlock = ({ children, className }) => {
             <PlayButton content={children} language={language} />
           </div>
           {tokens.map((line, i) => (
-            <div className={styles.line} key={i} {...getLineProps({ line, key: i })}>
+            <div key={i} {...getLineProps({ line, key: i })}>
               <span className={styles.line_no}>{i + 1}</span>
               <span className={styles.line_content}>
                 {line.map((token, key) => (

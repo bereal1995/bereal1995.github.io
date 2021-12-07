@@ -3,21 +3,38 @@
     "browser": true,
     "node": true
   },
-  "parser": "@babel/eslint-parser",
-  "parserOptions": {
-    "ecmaFeatures": {
-        "jsx": true
-    }
+  "extends": [
+    "eslint:recommended",
+    "plugin:react/recommended",
+    "plugin:prettier/recommended",
+    "plugin:@typescript-eslint/recommended",
+    "prettier",
+    "react-app"
+  ],
+  "parser": "@typescript-eslint/parser",
+  "plugins": ["react", "@typescript-eslint"],
+  "rules": {
+    "react/prop-types": 0,
+    "react/no-children-prop": 0,
+    "@typescript-eslint/explicit-module-boundary-types": 0,
+    "@typescript-eslint/no-empty-interface": 0,
+    "@typescript-eslint/ban-ts-comment": 0,
+    "@typescript-eslint/no-empty-function": 0,
+    "@typescript-eslint/ban-types": 0,
+    "no-empty-function": 0,
+    "prettier/prettier": [
+      "error",
+      {
+        "endOfLine": "auto"
+      }
+    ]
   },
-  "extends": ["plugin:prettier/recommended", "react", "prettier", "plugin:mdx/recommended"],
-  "rules": {"prettier/prettier": ["error", { "endOfLine": "auto" }], "react/prop-types": 0},
   "settings": {
     "react": {
       "version": "detect"
     },
     "mdx/code-blocks": true,
     "mdx/language-mapper": {}
-  },
-  "plugins": ["react"]
+  }
 }
 

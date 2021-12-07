@@ -1,7 +1,13 @@
 import React from 'react';
 import * as style from './CategoryItem.module.scss';
 
-export const CategoryItem = ({ title, onClick, isActive }) => {
+type CategoryItemProps = {
+  title: string;
+  isActive: boolean;
+  onClick: (title: string) => void;
+};
+
+export const CategoryItem: React.FC<CategoryItemProps> = ({ title, onClick, isActive }) => {
   const handleClick = () => {
     onClick(title);
   };

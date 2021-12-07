@@ -1,16 +1,33 @@
 import * as React from 'react';
-import Layout from '../../components/Layout/PostLayout';
+import Layout from '../../components/layout/PostLayout';
 import { graphql } from 'gatsby';
 import { MDXRenderer } from 'gatsby-plugin-mdx';
 import { MDXProvider } from '@mdx-js/react';
 import CodeBlock from '../../components/CodeBlock/CodeBlock';
+
+type BlogPostProps = {
+  data: {
+    site: {
+      siteMetadata: {
+        title: string;
+      };
+    };
+    mdx: {
+      frontmatter: {
+        title: string;
+        date: string;
+      };
+      body: string;
+    };
+  };
+};
 
 const components = {
   //코드 스타일링
   code: CodeBlock,
 };
 
-const BlogPost = ({ data }) => {
+const BlogPost: React.FC<BlogPostProps> = ({ data }) => {
   return (
     <Layout pageTitle={data.mdx.frontmatter.title} title={data.site.siteMetadata.title}>
       <p>{data.mdx.frontmatter.date}</p>

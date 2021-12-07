@@ -2,7 +2,12 @@ import React from 'react';
 import * as style from './Header.module.scss';
 import { Link } from 'gatsby';
 
-const Header = ({ pageTitle, children, title }) => {
+type HeaderProps = {
+  pageTitle?: string;
+  title?: string;
+};
+
+const Header: React.FC<HeaderProps> = ({ pageTitle, children, title }) => {
   return (
     <header className={style.container}>
       <div className={style.logo}>
