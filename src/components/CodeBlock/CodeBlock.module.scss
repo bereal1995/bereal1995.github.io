@@ -1,6 +1,10 @@
 .container {
-  padding: 15px;
-  border-radius: 5px;
+  margin-bottom: 20px;
+  > pre {
+    margin-bottom: 20px;
+    padding: 15px;
+    border-radius: 5px;
+  }
 }
 
 .code_header {
@@ -19,6 +23,9 @@
   background: none;
   border: none;
   cursor: pointer;
+  &:disabled {
+    cursor: unset;
+  }
 }
 
 
@@ -37,4 +44,36 @@
 .line_content {
   display: table-cell;
   padding: 5px;
+}
+
+
+.play_container {
+  position: relative;
+  display: flex;
+}
+.play_button {
+  min-height: 50px;
+  margin-right: 10px;
+  border: 1px solid #79b3fd;
+  border-radius: 5px;
+  &:hover {
+    background: #79b3fd;
+    color: #fff;
+  }
+}
+.reset_button {
+  position: absolute;
+  right: 0;
+  top: 0;
+  padding: 5px;
+  border: 1px solid #79b3fd;
+  border-radius: 5px;
+  &:hover {
+    background: #79b3fd;
+    color: #fff;
+  }
+}
+.line_item {
+  display: block;
+  margin-bottom: 10px;
 }

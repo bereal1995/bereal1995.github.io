@@ -4,6 +4,7 @@ import { graphql } from 'gatsby';
 import { MDXRenderer } from 'gatsby-plugin-mdx';
 import { MDXProvider } from '@mdx-js/react';
 import CodeBlock from '../../components/CodeBlock/CodeBlock';
+import * as style from './blog.module.scss';
 
 type BlogPostProps = {
   data: {
@@ -29,8 +30,7 @@ const components = {
 
 const BlogPost: React.FC<BlogPostProps> = ({ data }) => {
   return (
-    <Layout pageTitle={data.mdx.frontmatter.title} title={data.site.siteMetadata.title}>
-      <p>{data.mdx.frontmatter.date}</p>
+    <Layout title={data.mdx.frontmatter.title} date={data.mdx.frontmatter.date}>
       <MDXProvider components={components}>
         <MDXRenderer>{data.mdx.body}</MDXRenderer>
       </MDXProvider>

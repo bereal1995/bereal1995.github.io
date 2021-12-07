@@ -1,26 +1,22 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import * as styles from './CodeBlock.module.scss';
 import Highlight, { defaultProps, Language } from 'prism-react-renderer';
 import theme from 'prism-react-renderer/themes/vsDark';
 
 type CodeBlockProps = {
-  children: React.ReactChildren;
+  children: string;
   className: string;
-};
-
-type PlayButtonProps = {
-  content: any;
-  language: Language;
 };
 
 // https://levelup.gitconnected.com/code-review-avoid-declaring-react-component-inside-parent-component-1768a645f523
 // 참고자료
-const CopyButton = (content: any) => {
+const CopyButton: React.FC<{ content: string }> = ({ content }) => {
   const [text, setText] = useState('Copy');
 
   return (
     <button
       className={styles.code_button}
+      disabled={text === 'Copied!'}
       onClick={() => {
         navigator.clipboard.writeText(content);
         setText('Copied!');
@@ -34,18 +30,25 @@ const CopyButton = (content: any) => {
   );
 };
 
-const PlayButton: React.FC<PlayButtonProps> = ({ content, language }) => {
-  const ableLanguageList = ['js', 'javascript'];
-  const getIsAbleButton = (language: string) => {
-    return ableLanguageList.some((item) => item === language);
+const ResetButton: React.FC<{ onClickReset: (msg: string[]) => void }> = ({ onClickReset: _onClickReset }) => {
+  const onClickReset = () => {
+    _onClickReset([]);
   };
+  return (
+    <button onClick={onClickReset} className={`${styles.code_button} ${styles.reset_button}`}>
+      reset
+    </button>
+  );
+};
+
+const PlayButton: React.FC<{ content: string }> = ({ content }) => {
   const onClickPlay = () => {
+    // eslint-disable-next-line no-eval
     eval(content);
   };
 
-  if (!getIsAbleButton(language)) return null;
   return (
-    <button onClick={onClickPlay} className={styles.code_button}>
+    <button onClick={onClickPlay} className={`${styles.code_button} ${styles.play_button}`}>
       play
     </button>
   );
@@ -53,29 +56,69 @@ const PlayButton: React.FC<PlayButtonProps> = ({ content, language }) => {
 
 const CodeBlock: React.FC<CodeBlockProps> = ({ children, className }) => {
   const language = className.replace(/language-/, '') as Language;
+  const [logs, setLogs] = useState<string[]>([]);
+  const ableLanguageList = ['js', 'javascript'];
+  const isAblePlay = ableLanguageList.some((item) => item === language);
+
+  const onClickReset = (mgs: string[]) => {
+    setLogs(mgs);
+  };
+
+  useEffect(() => {
+    (function () {
+      const old = console.log;
+      console.log = function (message: string) {
+        if (typeof message == 'object') {
+          setLogs((prev) => [...prev, JSON.stringify(message)]);
+        } else {
+          setLogs((prev) => [...prev, message]);
+        }
+      };
+    })();
+  }, []);
 
   return (
-    <Highlight {...defaultProps} theme={theme} code={children as string} language={language}>
-      {({ className, style, tokens, getLineProps, getTokenProps }) => (
-        <pre className={`${className} ${styles.container}`} style={{ ...style }}>
-          <div className={styles.code_header}>
-            <span className={styles.language_name}>{language}</span>
-            <CopyButton content={children} />
-            <PlayButton content={children} language={language} />
-          </div>
-          {tokens.map((line, i) => (
-            <div key={i} {...getLineProps({ line, key: i })}>
-              <span className={styles.line_no}>{i + 1}</span>
-              <span className={styles.line_content}>
-                {line.map((token, key) => (
-                  <span key={key} {...getTokenProps({ token, key })} />
-                ))}
-              </span>
+    <div className={styles.container}>
+      <Highlight {...defaultProps} theme={theme} code={children} language={language}>
+        {({ className, style, tokens, getLineProps, getTokenProps }) => (
+          <pre className={className} style={{ ...style }}>
+            <div className={styles.code_header}>
+              <span className={styles.language_name}>{language}</span>
+              <CopyButton content={children} />
             </div>
-          ))}
-        </pre>
+            {tokens.map((line, i) => (
+              <div key={i} {...getLineProps({ line, key: i })}>
+                <span className={styles.line_no}>{i + 1}</span>
+                <span className={styles.line_content}>
+                  {line.map((token, key) => (
+                    <span key={key} {...getTokenProps({ token, key })} />
+                  ))}
+                </span>
+              </div>
+            ))}
+          </pre>
+        )}
+      </Highlight>
+      {isAblePlay && (
+        <Highlight {...defaultProps} theme={theme} code={children} language={language}>
+          {({ className, style }) => (
+            <pre className={className} style={{ ...style }}>
+              <div className={styles.play_container}>
+                <ResetButton onClickReset={onClickReset} />
+                <PlayButton content={children} />
+                <span className={styles.line_content}>
+                  {logs.map((item) => (
+                    <span key={item} className={styles.line_item}>
+                      {item}
+                    </span>
+                  ))}
+                </span>
+              </div>
+            </pre>
+          )}
+        </Highlight>
       )}
-    </Highlight>
+    </div>
   );
 };
 

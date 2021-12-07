@@ -68,9 +68,7 @@ const Home: React.FC<HomeProps> = (props) => {
               <Link to={`/blog/${node.slug}`}>
                 <article>
                   <div className={style.post_thumb} />
-                  <span className={style.post_date}>
-                    작성: {node.frontmatter.date} | 수정: {node.parent.modifiedTime}
-                  </span>
+                  <span className={style.post_date}>작성: {node.frontmatter.date}</span>
                   <h2 className={style.post_title}>{node.frontmatter.title}</h2>
                   <div className={style.post_preview}>{node.excerpt}</div>
                 </article>

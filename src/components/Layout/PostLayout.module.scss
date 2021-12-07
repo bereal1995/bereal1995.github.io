@@ -1,5 +1,20 @@
 .container {
-  max-width: 650px;
+  max-width: 750px;
   padding: 0 1rem;
   margin: 0 auto;
+}
+
+.header {
+  padding: 10px 0;
+  margin: 20px 0 10px;
+  border-bottom: 1px solid #000;
+}
+
+.title {
+  margin: 5px 0;
+}
+
+.date {
+  display: flex;
+  justify-content: flex-end;
 }
