@@ -41,10 +41,12 @@ const ResetButton: React.FC<{ onClickReset: (msg: string[]) => void }> = ({ onCl
   );
 };
 
-const PlayButton: React.FC<{ content: string }> = ({ content }) => {
+const PlayButton: React.FC<{ content: string; onClickPlay: (content: string) => void }> = ({
+  content,
+  onClickPlay: _onClickPlay,
+}) => {
   const onClickPlay = () => {
-    // eslint-disable-next-line no-eval
-    eval(content);
+    _onClickPlay(content);
   };
 
   return (
@@ -63,19 +65,16 @@ const CodeBlock: React.FC<CodeBlockProps> = ({ children, className }) => {
   const onClickReset = (mgs: string[]) => {
     setLogs(mgs);
   };
-
-  useEffect(() => {
-    (function () {
-      const old = console.log;
-      console.log = function (message: string) {
-        if (typeof message == 'object') {
-          setLogs((prev) => [...prev, JSON.stringify(message)]);
-        } else {
-          setLogs((prev) => [...prev, message]);
-        }
-      };
-    })();
-  }, []);
+  const onClickPlay = (content: string) => {
+    onClickReset([]);
+    const old = window.console.log;
+    console.log = (...args) => {
+      old(...args);
+      setLogs((prev) => [...prev, args.toString()]);
+    };
+    eval(content);
+    console.log = old;
+  };
 
   return (
     <div className={styles.container}>
@@ -105,7 +104,7 @@ const CodeBlock: React.FC<CodeBlockProps> = ({ children, className }) => {
             <pre className={className} style={{ ...style }}>
               <div className={styles.play_container}>
                 <ResetButton onClickReset={onClickReset} />
-                <PlayButton content={children} />
+                <PlayButton content={children} onClickPlay={onClickPlay} />
                 <span className={styles.line_content}>
                   {logs.map((item) => (
                     <span key={item} className={styles.line_item}>
