@@ -5,41 +5,16 @@ import { graphql, Link } from 'gatsby';
 import Header from '../components/header/Header';
 import { CategoryList } from '../components/category/CategoryList';
 import PageLayout from '../components/layout/PageLayout';
+import { queryTypes } from 'types/dataType';
 
 type HomeProps = {
-  data: {
-    site: {
-      siteMetadata: {
-        title: string;
-      };
-    };
-    allFile: {
-      nodes: {
-        name: string;
-      }[];
-    };
-    allMdx: {
-      nodes: {
-        excerpt: string;
-        frontmatter: {
-          date: string;
-          title: string;
-          category: string;
-        };
-        id: string;
-        parent: {
-          modifiedTime: string;
-        };
-        slug: string;
-      }[];
-    };
-  };
+  data: queryTypes;
 };
 
 const Home: React.FC<HomeProps> = (props) => {
   const { data } = props;
-  const [posts, setPosts] = useState<HomeProps['data']['allMdx']['nodes']>(data.allMdx.nodes);
-  const categories = data.allMdx.nodes.reduce((prev, current) => {
+  const [posts, setPosts] = useState<queryTypes['posts']['postItem']>(data.posts.postItem);
+  const categories = data.posts.postItem.reduce((prev, current) => {
     const category = current.frontmatter.category;
     return prev.includes(category) ? prev : [...prev, category];
   }, [] as string[]);
@@ -51,11 +26,11 @@ const Home: React.FC<HomeProps> = (props) => {
 
   useEffect(() => {
     if (category !== 'All') {
-      setPosts(data.allMdx.nodes.filter((item) => item.frontmatter.category === category));
+      setPosts(data.posts.postItem.filter((item) => item.frontmatter.category === category));
     } else {
-      setPosts(data.allMdx.nodes);
+      setPosts(data.posts.postItem);
     }
-  }, [category, data.allMdx.nodes]);
+  }, [category, data.posts.postItem]);
 
   return (
     <>
@@ -93,8 +68,11 @@ export const query = graphql`
         name
       }
     }
-    allMdx(sort: { fields: frontmatter___date, order: DESC }, filter: { frontmatter: { category: { ne: null } } }) {
-      nodes {
+    posts: allMdx(
+      sort: { fields: frontmatter___date, order: DESC }
+      filter: { frontmatter: { category: { ne: null } } }
+    ) {
+      postItem: nodes {
         parent {
           ... on File {
             modifiedTime(formatString: "MMMM D, YYYY")

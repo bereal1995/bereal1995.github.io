@@ -4,23 +4,10 @@ import { graphql } from 'gatsby';
 import { MDXRenderer } from 'gatsby-plugin-mdx';
 import { MDXProvider } from '@mdx-js/react';
 import CodeBlock from '../../components/CodeBlock/CodeBlock';
-import * as style from './blog.module.scss';
+import { queryTypes } from 'types/dataType';
 
 type BlogPostProps = {
-  data: {
-    site: {
-      siteMetadata: {
-        title: string;
-      };
-    };
-    mdx: {
-      frontmatter: {
-        title: string;
-        date: string;
-      };
-      body: string;
-    };
-  };
+  data: queryTypes;
 };
 
 const components = {
@@ -30,7 +17,11 @@ const components = {
 
 const BlogPost: React.FC<BlogPostProps> = ({ data }) => {
   return (
-    <Layout title={data.mdx.frontmatter.title} date={data.mdx.frontmatter.date}>
+    <Layout
+      title={data.mdx.frontmatter.title}
+      date={data.mdx.frontmatter.date}
+      thumbUrl={data.file.childImageSharp.fluid}
+    >
       <MDXProvider components={components}>
         <MDXRenderer>{data.mdx.body}</MDXRenderer>
       </MDXProvider>
@@ -51,6 +42,13 @@ export const query = graphql`
         date(formatString: "MMMM D, YYYY")
       }
       body
+    }
+    file(relativePath: { eq: "thumb_test.png" }) {
+      childImageSharp {
+        fluid {
+          ...GatsbyImageSharpFluid
+        }
+      }
     }
   }
 `;
