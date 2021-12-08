@@ -1,9 +1,9 @@
 import * as React from 'react';
-import Layout from '../../components/layout/PostLayout';
+import Layout from '../components/layout/PostLayout';
+import CodeBlock from '../components/CodeBlock/CodeBlock';
 import { graphql } from 'gatsby';
 import { MDXRenderer } from 'gatsby-plugin-mdx';
 import { MDXProvider } from '@mdx-js/react';
-import CodeBlock from '../../components/CodeBlock/CodeBlock';
 import { queryTypes } from 'types/dataType';
 
 type BlogPostProps = {
@@ -15,13 +15,10 @@ const components = {
   code: CodeBlock,
 };
 
-const BlogPost: React.FC<BlogPostProps> = ({ data }) => {
+const PostTemplate: React.FC<BlogPostProps> = ({ data }) => {
+  console.log('data', data);
   return (
-    <Layout
-      title={data.mdx.frontmatter.title}
-      date={data.mdx.frontmatter.date}
-      thumbUrl={data.file.childImageSharp.fluid}
-    >
+    <Layout title={data.mdx.frontmatter.title} date={data.mdx.frontmatter.date}>
       <MDXProvider components={components}>
         <MDXRenderer>{data.mdx.body}</MDXRenderer>
       </MDXProvider>
@@ -43,14 +40,7 @@ export const query = graphql`
       }
       body
     }
-    file(relativePath: { eq: "thumb_test.png" }) {
-      childImageSharp {
-        fluid {
-          ...GatsbyImageSharpFluid
-        }
-      }
-    }
   }
 `;
 
-export default BlogPost;
+export default PostTemplate;

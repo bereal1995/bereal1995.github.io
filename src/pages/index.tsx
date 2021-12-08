@@ -13,6 +13,7 @@ type HomeProps = {
 
 const Home: React.FC<HomeProps> = (props) => {
   const { data } = props;
+  console.log('data for home', data);
   const [posts, setPosts] = useState<queryTypes['posts']['postItem']>(data.posts.postItem);
   const categories = data.posts.postItem.reduce((prev, current) => {
     const category = current.frontmatter.category;
@@ -40,7 +41,7 @@ const Home: React.FC<HomeProps> = (props) => {
         <ul className={style.post_list}>
           {posts.map((node) => (
             <li key={node.id} className={style.post_item}>
-              <Link to={`/blog/${node.slug}`}>
+              <Link to={node.slug}>
                 <article>
                   <div className={style.post_thumb} />
                   <span className={style.post_date}>작성: {node.frontmatter.date}</span>

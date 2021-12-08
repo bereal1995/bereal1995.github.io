@@ -38,6 +38,9 @@ type mdxType = {
   frontmatter: {
     title: string;
     date: string;
+    thumbUrl?: {
+      base: string;
+    };
   };
   body: string;
 };
