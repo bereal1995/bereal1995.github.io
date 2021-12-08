@@ -6,6 +6,7 @@ import Header from '../components/header/Header';
 import { CategoryList } from '../components/category/CategoryList';
 import PageLayout from '../components/layout/PageLayout';
 import { queryTypes } from 'types/dataType';
+import Img from 'gatsby-image';
 
 type HomeProps = {
   data: queryTypes;
@@ -41,9 +42,15 @@ const Home: React.FC<HomeProps> = (props) => {
         <ul className={style.post_list}>
           {posts.map((node) => (
             <li key={node.id} className={style.post_item}>
-              <Link to={node.slug}>
+              <Link to={`post/${node.slug}`}>
                 <article>
-                  <div className={style.post_thumb} />
+                  <div className={style.post_thumb}>
+                    {node.frontmatter.featuredImage ? (
+                      <Img fluid={node.frontmatter.featuredImage?.childImageSharp.fluid} className={style.thumb} />
+                    ) : (
+                      <div className={style.post_thumb_null} />
+                    )}
+                  </div>
                   <span className={style.post_date}>작성: {node.frontmatter.date}</span>
                   <h2 className={style.post_title}>{node.frontmatter.title}</h2>
                   <div className={style.post_preview}>{node.excerpt}</div>
@@ -83,6 +90,13 @@ export const query = graphql`
           date(formatString: "MMMM D, YYYY")
           title
           category
+          featuredImage {
+            childImageSharp {
+              fluid(maxWidth: 800) {
+                ...GatsbyImageSharpFluid
+              }
+            }
+          }
         }
         id
         excerpt(pruneLength: 200, truncate: true)

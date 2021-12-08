@@ -1,19 +1,9 @@
-// eslint-disable-next-line @typescript-eslint/no-var-requires
-const path = require(`path`);
-
 module.exports = {
   siteMetadata: {
     title: 'hhxdragon',
   },
   plugins: [
     'gatsby-plugin-sass',
-    {
-      resolve: `gatsby-source-filesystem`,
-      options: {
-        name: `images`,
-        path: path.join(__dirname, `src`, `images`),
-      },
-    },
     'gatsby-plugin-sharp',
     'gatsby-transformer-sharp',
     // {
@@ -33,8 +23,14 @@ module.exports = {
     {
       resolve: `gatsby-source-filesystem`,
       options: {
-        path: path.join(__dirname, `content`, `post`),
+        path: `${__dirname}/content/post`,
         name: `post`,
+      },
+    },
+    {
+      resolve: `gatsby-source-filesystem`,
+      options: {
+        path: `${__dirname}/content/images`,
       },
     },
     'gatsby-plugin-mdx',

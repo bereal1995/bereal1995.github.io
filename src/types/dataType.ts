@@ -3,11 +3,7 @@ import { FluidObject } from 'gatsby-image';
 type postsType = {
   postItem: {
     excerpt: string;
-    frontmatter: {
-      date: string;
-      title: string;
-      category: string;
-    };
+    frontmatter: mdxType['frontmatter'];
     id: string;
     parent: {
       modifiedTime: string;
@@ -38,8 +34,11 @@ type mdxType = {
   frontmatter: {
     title: string;
     date: string;
-    thumbUrl?: {
-      base: string;
+    category: string;
+    featuredImage: {
+      childImageSharp: {
+        fluid: FluidObject | FluidObject[];
+      };
     };
   };
   body: string;
