@@ -1,0 +1,21 @@
+{
+  "React Components!": {
+    "prefix": "rc",
+    "body": [
+      "import React from 'react';",
+      "import styles from './${1:App}.module.scss';",
+      "",
+      "export type ${1:App}Props = {",
+      "}",
+      "",
+      "const ${1:App}: React.FC<${1:App}Props> = (props) => {",
+      "",
+      "return (",
+      "<${2:div} className={styles.root}></${2:div}>",
+      ");",
+      "};",
+      "",
+      "export default ${1:App};"
+    ]
+  },
+}

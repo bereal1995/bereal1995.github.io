@@ -1,16 +1,14 @@
-import { FluidObject } from 'gatsby-image';
+import { IGatsbyImageData } from 'gatsby-plugin-image';
 
 type postsType = {
-  postItem: {
-    excerpt: string;
-    frontmatter: mdxType['frontmatter'];
-    id: string;
-    parent: {
-      modifiedTime: string;
-    };
-    slug: string;
-  }[];
-};
+  excerpt: string;
+  frontmatter: mdxType['frontmatter'];
+  id: string;
+  parent: {
+    modifiedTime: string;
+  };
+  slug: string;
+}[];
 
 type siteType = {
   siteMetadata: {
@@ -25,9 +23,7 @@ type allFileType = {
 };
 
 type fileType = {
-  childImageSharp: {
-    fluid: FluidObject | FluidObject[];
-  };
+  childImageSharp: IGatsbyImageData;
 };
 
 type mdxType = {
@@ -35,11 +31,7 @@ type mdxType = {
     title: string;
     date: string;
     category: string;
-    featuredImage: {
-      childImageSharp: {
-        fluid: FluidObject | FluidObject[];
-      };
-    };
+    featuredImage: IGatsbyImageData;
   };
   body: string;
 };
@@ -47,7 +39,9 @@ type mdxType = {
 export type queryTypes = {
   site: siteType;
   allFile: allFileType;
-  posts: postsType;
+  allMdx: {
+    posts: postsType;
+  };
   file: fileType;
   mdx: mdxType;
 };

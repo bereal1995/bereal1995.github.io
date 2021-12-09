@@ -1,12 +1,11 @@
 import React, { useState, useEffect } from 'react';
-import * as style from './index.module.scss';
 import './../styles/index.scss';
-import { graphql, Link } from 'gatsby';
+import { graphql } from 'gatsby';
 import Header from '../components/header/Header';
-import { CategoryList } from '../components/category/CategoryList';
+import CategoryList from '../components/category/CategoryList';
 import PageLayout from '../components/layout/PageLayout';
 import { queryTypes } from 'types/dataType';
-import Img from 'gatsby-image';
+import PostList from '../components/post/PostList';
 
 type HomeProps = {
   data: queryTypes;
@@ -14,13 +13,13 @@ type HomeProps = {
 
 const Home: React.FC<HomeProps> = (props) => {
   const { data } = props;
-  console.log('data for home', data);
-  const [posts, setPosts] = useState<queryTypes['posts']['postItem']>(data.posts.postItem);
-  const categories = data.posts.postItem.reduce((prev, current) => {
+  const [posts, setPosts] = useState<queryTypes['allMdx']['posts']>(data.allMdx.posts);
+  const [category, setCategory] = useState<string>('All');
+
+  const categories = posts.reduce((prev, current) => {
     const category = current.frontmatter.category;
     return prev.includes(category) ? prev : [...prev, category];
   }, [] as string[]);
-  const [category, setCategory] = useState<string>('All');
 
   const onClickCategory = (category: string) => {
     setCategory(category);
@@ -28,37 +27,19 @@ const Home: React.FC<HomeProps> = (props) => {
 
   useEffect(() => {
     if (category !== 'All') {
-      setPosts(data.posts.postItem.filter((item) => item.frontmatter.category === category));
+      setPosts(posts.filter((item) => item.frontmatter.category === category));
     } else {
-      setPosts(data.posts.postItem);
+      setPosts(posts);
     }
-  }, [category, data.posts.postItem]);
+  }, [category, posts]);
 
+  console.log('data for home', data);
   return (
     <>
       <Header />
       <PageLayout>
         <CategoryList categories={categories} category={category} setCategory={onClickCategory} />
-        <ul className={style.post_list}>
-          {posts.map((node) => (
-            <li key={node.id} className={style.post_item}>
-              <Link to={`post/${node.slug}`}>
-                <article>
-                  <div className={style.post_thumb}>
-                    {node.frontmatter.featuredImage ? (
-                      <Img fluid={node.frontmatter.featuredImage?.childImageSharp.fluid} className={style.thumb} />
-                    ) : (
-                      <div className={style.post_thumb_null} />
-                    )}
-                  </div>
-                  <span className={style.post_date}>작성: {node.frontmatter.date}</span>
-                  <h2 className={style.post_title}>{node.frontmatter.title}</h2>
-                  <div className={style.post_preview}>{node.excerpt}</div>
-                </article>
-              </Link>
-            </li>
-          ))}
-        </ul>
+        <PostList posts={posts} thumbnailNull={data.file.childImageSharp} />
       </PageLayout>
     </>
   );
@@ -76,11 +57,13 @@ export const query = graphql`
         name
       }
     }
-    posts: allMdx(
-      sort: { fields: frontmatter___date, order: DESC }
-      filter: { frontmatter: { category: { ne: null } } }
-    ) {
-      postItem: nodes {
+    file(relativePath: { eq: "thumb_null.png" }) {
+      childImageSharp {
+        gatsbyImageData(width: 800)
+      }
+    }
+    allMdx(sort: { fields: frontmatter___date, order: DESC }, filter: { frontmatter: { category: { ne: null } } }) {
+      posts: nodes {
         parent {
           ... on File {
             modifiedTime(formatString: "MMMM D, YYYY")
@@ -92,9 +75,7 @@ export const query = graphql`
           category
           featuredImage {
             childImageSharp {
-              fluid(maxWidth: 800) {
-                ...GatsbyImageSharpFluid
-              }
+              gatsbyImageData(width: 800)
             }
           }
         }

@@ -8,7 +8,7 @@ type CategoryListProps = {
   setCategory: (category: string) => void;
 };
 
-export const CategoryList: React.FC<CategoryListProps> = ({ categories = [], category, setCategory }) => {
+const CategoryList: React.FC<CategoryListProps> = ({ categories = [], category, setCategory }) => {
   return (
     <ul className={style.container} role="tablist" id="category">
       <CategoryItem title={'All'} onClick={setCategory} isActive={category === 'All'} />
@@ -18,3 +18,5 @@ export const CategoryList: React.FC<CategoryListProps> = ({ categories = [], cat
     </ul>
   );
 };
+
+export default CategoryList;
