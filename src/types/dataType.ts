@@ -43,5 +43,6 @@ export type queryTypes = {
     posts: postsType;
   };
   file: fileType;
+  avatar: fileType;
   mdx: mdxType;
 };

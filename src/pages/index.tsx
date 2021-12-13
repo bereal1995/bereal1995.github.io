@@ -13,10 +13,11 @@ type HomeProps = {
 
 const Home: React.FC<HomeProps> = (props) => {
   const { data } = props;
-  const [posts, setPosts] = useState<queryTypes['allMdx']['posts']>(data.allMdx.posts);
+  const allPost = data.allMdx.posts;
+  const [posts, setPosts] = useState<queryTypes['allMdx']['posts']>(allPost);
   const [category, setCategory] = useState<string>('All');
 
-  const categories = posts.reduce((prev, current) => {
+  const categories = allPost.reduce((prev, current) => {
     const category = current.frontmatter.category;
     return prev.includes(category) ? prev : [...prev, category];
   }, [] as string[]);
@@ -27,16 +28,16 @@ const Home: React.FC<HomeProps> = (props) => {
 
   useEffect(() => {
     if (category !== 'All') {
-      setPosts(posts.filter((item) => item.frontmatter.category === category));
+      setPosts(allPost.filter((item) => item.frontmatter.category === category));
     } else {
-      setPosts(posts);
+      setPosts(allPost);
     }
-  }, [category, posts]);
+  }, [category, allPost]);
 
   console.log('data for home', data);
   return (
     <>
-      <Header />
+      <Header avatar={data.avatar} />
       <PageLayout>
         <CategoryList categories={categories} category={category} setCategory={onClickCategory} />
         <PostList posts={posts} thumbnailNull={data.file.childImageSharp} />
@@ -60,6 +61,11 @@ export const query = graphql`
     file(relativePath: { eq: "thumb_null.png" }) {
       childImageSharp {
         gatsbyImageData(width: 800)
+      }
+    }
+    avatar: file(relativePath: { eq: "profile.png" }) {
+      childImageSharp {
+        gatsbyImageData(width: 100, height: 100, placeholder: BLURRED, formats: [AUTO, WEBP, AVIF])
       }
     }
     allMdx(sort: { fields: frontmatter___date, order: DESC }, filter: { frontmatter: { category: { ne: null } } }) {
