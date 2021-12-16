@@ -24,7 +24,7 @@ const Header: React.FC<HeaderProps> = ({ pageTitle, children, title, avatar }) =
         <nav>
           <ul>
             <li>
-              <Link to="/">About</Link>
+              <Link to="/about">About</Link>
             </li>
           </ul>
         </nav>
@@ -32,8 +32,10 @@ const Header: React.FC<HeaderProps> = ({ pageTitle, children, title, avatar }) =
       <div className={styles.profile}>
         <div className={styles.thumb}>{avatarImage && <GatsbyImage image={avatarImage} alt="avatar_img" />}</div>
         <div className={styles.profile_text}>
-          <h2>조효형</h2>
-          <span>프론트엔드 개발자 조효형입니다.</span>
+          <div>
+            웹 프론트엔드 개발자 조효형입니다. <br />
+            꾸준히 공부하기 위해 노력중이고, 재미있는 기능을 사용해보는걸 좋아합니다.
+          </div>
         </div>
       </div>
     </header>

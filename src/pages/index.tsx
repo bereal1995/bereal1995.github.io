@@ -68,7 +68,10 @@ export const query = graphql`
         gatsbyImageData(width: 100, height: 100, placeholder: BLURRED, formats: [AUTO, WEBP, AVIF])
       }
     }
-    allMdx(sort: { fields: frontmatter___date, order: DESC }, filter: { frontmatter: { category: { ne: null } } }) {
+    allMdx(
+      sort: { fields: frontmatter___date, order: DESC }
+      filter: { slug: { ne: "resume" }, frontmatter: { category: { ne: null } } }
+    ) {
       posts: nodes {
         parent {
           ... on File {

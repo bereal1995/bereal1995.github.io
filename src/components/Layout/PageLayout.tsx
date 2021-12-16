@@ -1,5 +1,5 @@
 import React from 'react';
-import * as styles from './PostLayout.module.scss';
+import * as styles from './PageLayout.module.scss';
 
 type PageLayoutProps = {};
 
