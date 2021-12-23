@@ -1,7 +1,7 @@
 .container {
   max-width: 750px;
   padding: 0 20px;
-  margin: 0 auto;
+  margin: 0 auto 30px;
 }
 
 .top {
@@ -12,22 +12,15 @@
 .logo {
   font-size: 24px;
   font-weight: bold;
+  h1 {
+    border: none;
+    font-size: 30px;
+  }
 }
 
-.profile {
-  display: flex;
-}
-
-.thumb {
-  overflow: hidden;
-  width: 80px;
-  height: 80px;
-  margin-right: 20px;
-  border-radius: 50%;
-  background: #000;
-}
-
-.profile_text {
+.nav {
   display: flex;
   align-items: center;
+  height: 100%;
+  list-style: none;
 }

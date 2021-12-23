@@ -5,13 +5,10 @@
 }
 
 .header {
+  position: relative;
   padding: 10px 0;
   margin: 20px 0 10px;
   border-bottom: 1px solid #000;
-}
-
-.thumb {
-  width: 100%;
 }
 
 .title {
@@ -19,6 +16,11 @@
 }
 
 .date {
-  display: flex;
-  justify-content: flex-end;
+  position: absolute;
+  right: 0;
+  top: 50%;
+}
+
+.thumb {
+  margin-bottom: 20px;
 }

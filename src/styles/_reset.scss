@@ -1,9 +1,43 @@
-ul {
-  list-style: none;
-  padding: 0;
+body {
+  font-family: 'Noto Sans KR', sans-serif;
 }
 
 h1 {
   margin: 0;
-  padding: 0;
+  font-size: 2.4em;
+  letter-spacing: -1px;
+  border-bottom: transparent !important;
+}
+
+h2 {
+  margin: 0;
+  font-size: 1.75em;
+  letter-spacing: -1px;
+  border-bottom: transparent !important;
+}
+
+h3 {
+  margin-top: 1.5em;
+  margin-bottom: 0.3em;
+  font-size: 1.5em;
+  letter-spacing: -1px;
+  border-bottom: transparent !important;
+}
+
+h4 {
+  font-size: 1.25em;
+  letter-spacing: -1px;
+}
+
+td:first-child {
+  text-align: right !important;
+  font-weight: bolder !important;
+}
+
+th {
+  padding: 0 !important;
+}
+
+code {
+  font-weight: 500 !important;
 }

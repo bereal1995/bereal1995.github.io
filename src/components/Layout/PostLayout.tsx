@@ -1,6 +1,5 @@
 import React from 'react';
-import * as style from './PostLayout.module.scss';
-import Img from 'gatsby-image';
+import * as styles from './PostLayout.module.scss';
 import { queryTypes } from 'types/dataType';
 import { GatsbyImage } from 'gatsby-plugin-image';
 
@@ -15,13 +14,13 @@ const PostLayout: React.FC<PostLayoutProps> = (props) => {
   const { children, title, date, imageData } = props;
 
   return (
-    <div className={style.container}>
+    <div className={styles.container}>
       <main>
-        <div className={style.header}>
-          {imageData && <GatsbyImage image={imageData} alt={'thumbnail'} />}
-          <h1 className={style.title}>{title}</h1>
-          <span className={style.date}>{date}</span>
+        <div className={styles.header}>
+          <h1 className={styles.title}>{title}</h1>
+          <span className={styles.date}>{date}</span>
         </div>
+        {imageData && <GatsbyImage image={imageData} alt={'thumbnail'} className={styles.thumb} />}
         {children}
       </main>
     </div>

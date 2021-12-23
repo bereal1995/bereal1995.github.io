@@ -32,6 +32,7 @@ type mdxType = {
     date: string;
     category: string;
     featuredImage: IGatsbyImageData;
+    embeddedImagesLocal: any;
   };
   body: string;
 };

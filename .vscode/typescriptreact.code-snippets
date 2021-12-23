@@ -3,7 +3,7 @@
     "prefix": "rc",
     "body": [
       "import React from 'react';",
-      "import styles from './${1:App}.module.scss';",
+      "import * as styles from './${1:App}.module.scss';",
       "",
       "export type ${1:App}Props = {",
       "}",

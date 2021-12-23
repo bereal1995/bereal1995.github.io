@@ -6,6 +6,7 @@ import theme from 'prism-react-renderer/themes/vsDark';
 type CodeBlockProps = {
   children: string;
   className: string;
+  metastring: string;
 };
 
 // https://levelup.gitconnected.com/code-review-avoid-declaring-react-component-inside-parent-component-1768a645f523
@@ -56,11 +57,10 @@ const PlayButton: React.FC<{ content: string; onClickPlay: (content: string) => 
   );
 };
 
-const CodeBlock: React.FC<CodeBlockProps> = ({ children, className }) => {
+const CodeBlock: React.FC<CodeBlockProps> = (props) => {
+  const { children, className, metastring } = props;
   const language = className.replace(/language-/, '') as Language;
   const [logs, setLogs] = useState<string[]>([]);
-  const ableLanguageList = ['js', 'javascript'];
-  const isAblePlay = ableLanguageList.some((item) => item === language);
 
   const onClickReset = (mgs: string[]) => {
     setLogs(mgs);
@@ -98,7 +98,7 @@ const CodeBlock: React.FC<CodeBlockProps> = ({ children, className }) => {
           </pre>
         )}
       </Highlight>
-      {isAblePlay && (
+      {metastring === 'play' && (
         <Highlight {...defaultProps} theme={theme} code={children} language={language}>
           {({ className, style }) => (
             <pre className={className} style={{ ...style }}>

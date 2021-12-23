@@ -84,7 +84,7 @@ export const query = graphql`
           category
           featuredImage {
             childImageSharp {
-              gatsbyImageData(width: 800)
+              gatsbyImageData(width: 600)
             }
           }
         }

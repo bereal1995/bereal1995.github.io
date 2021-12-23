@@ -1,0 +1,18 @@
+.root {
+  display: flex;
+  padding: 0 10px;
+}
+
+.thumb {
+  overflow: hidden;
+  width: 80px;
+  height: 80px;
+  margin-right: 20px;
+  border-radius: 50%;
+  background: #000;
+}
+
+.profile_text {
+  display: flex;
+  align-items: center;
+}

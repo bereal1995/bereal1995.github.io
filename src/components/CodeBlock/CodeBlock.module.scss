@@ -1,6 +1,7 @@
 .container {
   margin-bottom: 30px;
   > pre {
+    overflow: auto;
     margin-bottom: 5px;
     padding: 15px;
     border-radius: 5px;
@@ -43,7 +44,6 @@
 
 .line_content {
   display: table-cell;
-  padding: 5px;
 }
 
 

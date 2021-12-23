@@ -1,16 +1,23 @@
 
 $primary: #00852FFF;
 .container {
+  max-width: 750px;
+  padding: 1.5rem;
+  margin: 0 auto;
+
   h1 {
     border-left: 12px solid $primary;
     padding-left: 8px;
     padding-bottom: 0px;
+    margin-top: 2em;
     line-height: 1.05;
   }
   
   h2 {
     position: relative;
     display: inline-block;
+    margin-top: 0.5em;
+    margin-bottom: 0.2em;
     &::after {
       position: absolute;
       display: inline-block;
@@ -30,6 +37,8 @@ $primary: #00852FFF;
   
   code {
     color: $primary;
+    padding: 2px;
     border: 1.4px solid $primary;
+    border-radius: 5px;
   }
 }
