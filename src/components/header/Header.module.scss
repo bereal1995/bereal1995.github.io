@@ -7,12 +7,14 @@
 .top {
   display: flex;
   justify-content: space-between;
+  height: 60px;
 }
 
 .logo {
   font-size: 24px;
   font-weight: bold;
   h1 {
+    margin: 0;
     border: none;
     font-size: 30px;
   }

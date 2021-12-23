@@ -3,15 +3,16 @@ body {
 }
 
 h1 {
-  margin: 0;
+  margin-top: 2em;
   font-size: 2.4em;
   letter-spacing: -1px;
   border-bottom: transparent !important;
 }
 
 h2 {
-  margin: 0;
-  font-size: 1.75em;
+  margin-top: 0.5em;
+  margin-bottom: 0.2em;
+  font-size: 2.15em;
   letter-spacing: -1px;
   border-bottom: transparent !important;
 }
@@ -41,3 +42,4 @@ th {
 code {
   font-weight: 500 !important;
 }
+
