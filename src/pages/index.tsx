@@ -34,7 +34,6 @@ const Home: React.FC<HomeProps> = (props) => {
     }
   }, [category, allPost]);
 
-  console.log('data for home', data);
   return (
     <>
       <Header avatar={data.avatar} />
@@ -58,7 +57,7 @@ export const query = graphql`
         name
       }
     }
-    file(relativePath: { eq: "thumb_null.png" }) {
+    file(relativePath: { eq: "thumb/thumb_null.png" }) {
       childImageSharp {
         gatsbyImageData(width: 800)
       }

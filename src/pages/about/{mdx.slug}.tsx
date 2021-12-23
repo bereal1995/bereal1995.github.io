@@ -9,7 +9,6 @@ type AboutProps = {
 };
 
 const About: React.FC<AboutProps> = ({ data }) => {
-  console.log('data', data);
   return (
     <AboutLayout>
       <MDXRenderer>{data.mdx.body}</MDXRenderer>
@@ -25,6 +24,11 @@ export const query = graphql`
       }
     }
     mdx(slug: { eq: $slug }) {
+      parent {
+        ... on File {
+          modifiedTime(formatString: "MMMM D, YYYY")
+        }
+      }
       frontmatter {
         title
         date(formatString: "MMMM D, YYYY")

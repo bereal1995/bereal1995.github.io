@@ -37,7 +37,7 @@ export const query = graphql`
         title
       }
     }
-    file(relativePath: { eq: "thumb_null.png" }) {
+    file(relativePath: { eq: "thumb/thumb_null.png" }) {
       childImageSharp {
         gatsbyImageData(width: 800)
       }

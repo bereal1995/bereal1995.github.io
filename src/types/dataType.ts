@@ -35,6 +35,9 @@ type mdxType = {
     embeddedImagesLocal: any;
   };
   body: string;
+  parent: {
+    modifiedTime: any;
+  };
 };
 
 export type queryTypes = {
