@@ -56,10 +56,10 @@ module.exports = {
           {
             resolve: `gatsby-remark-images`,
             options: {
-              maxWidth: 900,
+              maxWidth: 800,
             },
           },
-          'gatsby-remark-copy-linked-files',
+          'gatsby-remark-copy-linked-files', // gif 사용하기 위해 추가
         ],
         plugins: [`gatsby-remark-images`],
       },

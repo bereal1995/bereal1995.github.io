@@ -5,7 +5,7 @@ import { MDXProvider } from '@mdx-js/react';
 import { queryTypes } from 'types/dataType';
 import PostLayout from '../../components/layout/PostLayout';
 import { getImage } from 'gatsby-plugin-image';
-import CodeBlock from '../../components/codeBlock/CodeBlock';
+import CodeBlock from '../../components/CodeBlock/CodeBlock';
 
 type BlogPostProps = {
   data: queryTypes;
@@ -21,7 +21,6 @@ const PostTemplate: React.FC<BlogPostProps> = ({ data }) => {
   const imageData = frontmatter.featuredImage
     ? getImage(frontmatter.featuredImage)
     : getImage(data.file.childImageSharp);
-  console.log('data', data);
   return (
     <PostLayout title={frontmatter.title} date={frontmatter.date} imageData={imageData}>
       <MDXProvider components={components}>
