@@ -3,7 +3,7 @@ import { graphql } from 'gatsby';
 import { MDXRenderer } from 'gatsby-plugin-mdx';
 import { MDXProvider } from '@mdx-js/react';
 import PostLayout from '../../components/Layout/post';
-import CodeBlock from '../../components/codeBlock/codeblock';
+import CodeBlock from '../../components/codeBlock/codebox';
 import Header from '../../components/header/Header';
 import { queryTypes } from '../../types/dataType';
 

@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import * as styles from './codeblock.module.scss';
+import * as styles from './codebox.module.scss';
 import Highlight, { defaultProps, Language } from 'prism-react-renderer';
 import theme from 'prism-react-renderer/themes/vsDark';
 
