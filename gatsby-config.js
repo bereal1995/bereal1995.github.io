@@ -1,7 +1,8 @@
+// eslint-disable-next-line @typescript-eslint/no-var-requires
+const metaConfig = require('./gatsby-meta-config');
+
 module.exports = {
-  siteMetadata: {
-    title: 'hhxdragon',
-  },
+  siteMetadata: metaConfig,
   plugins: [
     'gatsby-plugin-sass',
     `gatsby-plugin-image`,
