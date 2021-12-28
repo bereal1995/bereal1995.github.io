@@ -1,16 +1,16 @@
-import React, { useEffect, useRef } from 'react';
+import React, { useCallback, useEffect, useRef } from 'react';
 import * as styles from './NavigationBar.module.scss';
 
 export type NavigationBarProps = {
   list?: any[];
 };
 
+// TODO: 네비게이션바 작업 필요함
 const NavigationBar: React.FC<NavigationBarProps> = (props) => {
   const { list } = props;
   const rootRef = useRef<HTMLDivElement>(null);
-  console.log('list', list);
 
-  const createTreeUi = function (arr: any[], target: any, depth: number) {
+  const createTreeUi = useCallback((arr: any[], target: any, depth: number) => {
     const ul = document.createElement('ul');
     for (const el of arr) {
       const li = document.createElement('li');
@@ -27,14 +27,13 @@ const NavigationBar: React.FC<NavigationBarProps> = (props) => {
         target.append(ul);
       }
     }
-  };
+  }, []);
 
   useEffect(() => {
     if (rootRef.current && list) {
-      // createList(list, rootRef.current, 2);
       createTreeUi(list, rootRef.current, 2);
     }
-  }, []);
+  }, [createTreeUi, list]);
 
   return <div className={styles.root} ref={rootRef}></div>;
 };
