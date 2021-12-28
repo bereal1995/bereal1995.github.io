@@ -4,8 +4,8 @@ import { graphql } from 'gatsby';
 import Header from '../components/header/Header';
 import CategoryList from '../components/category/CategoryList';
 import PageLayout from '../components/layout/PageLayout';
-import { queryTypes } from 'types/dataType';
 import PostList from '../components/post/PostList';
+import { queryTypes } from '../types/dataType';
 
 type HomeProps = {
   data: queryTypes;
