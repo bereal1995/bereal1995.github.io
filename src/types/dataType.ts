@@ -38,6 +38,12 @@ type mdxType = {
   parent: {
     modifiedTime: any;
   };
+  mdxAST: {
+    children: {
+      type: string;
+      value: string;
+    }[];
+  };
 };
 
 export type queryTypes = {
