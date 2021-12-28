@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { graphql } from 'gatsby';
 import { queryTypes } from './../../types/dataType';
-import AboutLayout from '../../components/Layout/aboutLayout';
+import AboutLayout from '../../components/Layout/about';
 import { MDXRenderer } from 'gatsby-plugin-mdx';
 
 type AboutProps = {

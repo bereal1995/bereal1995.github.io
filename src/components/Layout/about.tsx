@@ -1,5 +1,5 @@
 import React from 'react';
-import * as styles from './aboutLayout.module.scss';
+import * as styles from './about.module.scss';
 
 type AboutLayoutProps = {};
 
