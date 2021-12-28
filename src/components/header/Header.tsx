@@ -8,12 +8,10 @@ import Profile from './Profile';
 type HeaderProps = {
   pageTitle?: string;
   title?: string;
-  avatar: queryTypes['avatar'];
+  avatar?: queryTypes['avatar'];
 };
 
 const Header: React.FC<HeaderProps> = ({ pageTitle, children, title, avatar }) => {
-  const avatarImage = getImage(avatar.childImageSharp);
-
   return (
     <header className={styles.container}>
       <div className={styles.top}>
@@ -33,7 +31,7 @@ const Header: React.FC<HeaderProps> = ({ pageTitle, children, title, avatar }) =
           </ul>
         </nav>
       </div>
-      <Profile avatarImage={avatarImage} />
+      {avatar && <Profile avatarImage={getImage(avatar.childImageSharp)} />}
     </header>
   );
 };

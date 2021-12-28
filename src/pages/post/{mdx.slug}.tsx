@@ -5,6 +5,7 @@ import { MDXProvider } from '@mdx-js/react';
 import { queryTypes } from 'types/dataType';
 import PostLayout from '../../components/layout/PostLayout';
 import CodeBlock from '../../components/codeBlock';
+import Header from '../../components/header/Header';
 
 type BlogPostProps = {
   data: queryTypes;
@@ -17,11 +18,14 @@ const components = {
 
 const PostTemplate: React.FC<BlogPostProps> = ({ data }) => {
   return (
-    <PostLayout data={data}>
-      <MDXProvider components={components}>
-        <MDXRenderer>{data.mdx.body}</MDXRenderer>
-      </MDXProvider>
-    </PostLayout>
+    <>
+      <Header />
+      <PostLayout data={data}>
+        <MDXProvider components={components}>
+          <MDXRenderer>{data.mdx.body}</MDXRenderer>
+        </MDXProvider>
+      </PostLayout>
+    </>
   );
 };
 

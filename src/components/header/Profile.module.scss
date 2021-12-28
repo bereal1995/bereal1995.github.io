@@ -5,6 +5,7 @@
 
 .thumb {
   overflow: hidden;
+  flex: 0 0 80px;
   width: 80px;
   height: 80px;
   margin-right: 20px;
@@ -15,4 +16,5 @@
 .profile_text {
   display: flex;
   align-items: center;
+  font-size: 14px;
 }
