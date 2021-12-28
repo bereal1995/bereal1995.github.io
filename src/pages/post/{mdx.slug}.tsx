@@ -2,10 +2,10 @@ import * as React from 'react';
 import { graphql } from 'gatsby';
 import { MDXRenderer } from 'gatsby-plugin-mdx';
 import { MDXProvider } from '@mdx-js/react';
-import { queryTypes } from 'types/dataType';
-import PostLayout from '../../components/layout/PostLayout';
-import CodeBlock from '../../components/codeBlock';
+import PostLayout from '../../components/Layout/postLayout';
+import CodeBlock from '../../components/codeBlock/codeBlock';
 import Header from '../../components/header/Header';
+import { queryTypes } from '../../types/dataType';
 
 type BlogPostProps = {
   data: queryTypes;

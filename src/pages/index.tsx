@@ -3,7 +3,7 @@ import './../styles/index.scss';
 import { graphql } from 'gatsby';
 import Header from '../components/header/Header';
 import CategoryList from '../components/category/CategoryList';
-import PageLayout from '../components/layout/PageLayout';
+import PageLayout from '../components/Layout/pageLayout';
 import PostList from '../components/post/PostList';
 import { queryTypes } from '../types/dataType';
 

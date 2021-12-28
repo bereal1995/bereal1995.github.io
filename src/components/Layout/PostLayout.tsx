@@ -1,9 +1,9 @@
 import React from 'react';
-import * as styles from './PostLayout.module.scss';
-import { queryTypes } from 'types/dataType';
+import * as styles from './postLayout.module.scss';
 import { GatsbyImage } from 'gatsby-plugin-image';
 // import NavigationBar from './../navigationBar/NavigationBar';
 import { getImage } from 'gatsby-plugin-image';
+import { queryTypes } from '../../types/dataType';
 
 type PostLayoutProps = {
   pageTitle?: string;
