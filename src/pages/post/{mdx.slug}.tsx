@@ -36,7 +36,7 @@ export const query = graphql`
         title
       }
     }
-    file(relativePath: { eq: "thumb/thumb_null.png" }) {
+    nullThumb: file(relativePath: { eq: "thumb/thumb_null.png" }) {
       childImageSharp {
         gatsbyImageData(width: 800)
       }
@@ -54,7 +54,7 @@ export const query = graphql`
       }
       id
       body
-      mdxAST
+      tableOfContents
     }
   }
 `;

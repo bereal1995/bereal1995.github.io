@@ -1,19 +1,31 @@
 .root {
+  display: none;
   position: absolute;
   left: 100%;
   ul {
-    width: 240px;
     list-style: none;
   }
   > ul {
-    position: fixed;
+    overflow: auto;
+    position: sticky;
+    top: 10rem;
+    width: 240px;
+    max-height: calc(100vh - 7rem);
+    flex-shrink: 0;
+    padding: 0 10px;
   }
   a {
     padding: 2px;
-    color: #ccc;
+    color: var(--hh-tool-color);
     transition:all 100ms cubic-bezier(0.4, 0, 0.2, 1) 0s
   }
-  a:hover, a:active {
-    color: #000;
+  a:hover, a:active, a.active {
+    color: var(--hh-primary-color);
+  }
+}
+
+@media screen and (min-width: 1265px) {
+  .root{
+    display: block;
   }
 }

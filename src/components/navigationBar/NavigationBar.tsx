@@ -1,41 +1,61 @@
-import React, { useCallback, useEffect, useRef } from 'react';
+import React, { useEffect, useState } from 'react';
+import { queryTypes } from 'types/dataType';
 import * as styles from './NavigationBar.module.scss';
+import classNames from 'classnames/bind';
+
+const cx = classNames.bind(styles);
 
 export type NavigationBarProps = {
-  list?: any[];
+  items?: queryTypes['mdx']['tableOfContents']['items'];
+  activeId?: string;
 };
 
-// TODO: 네비게이션바 작업 필요함
-const NavigationBar: React.FC<NavigationBarProps> = (props) => {
-  const { list } = props;
-  const rootRef = useRef<HTMLDivElement>(null);
+const NavMenu: React.FC<NavigationBarProps> = (props) => {
+  const { items, activeId } = props;
 
-  const createTreeUi = useCallback((arr: any[], target: any, depth: number) => {
-    const ul = document.createElement('ul');
-    for (const el of arr) {
-      const li = document.createElement('li');
-      const a = document.createElement('a');
-      const text = el.children[0].value;
-      const id = el.children[0].value.replace(/\s/g, '-').replace(/\./g, '');
-      a.setAttribute('href', `#${id}`);
-      a.append(text);
-      if (el.depth > depth) {
-        createTreeUi([el], ul, el.depth);
-      } else {
-        li.append(a);
-        ul.append(li);
-        target.append(ul);
-      }
-    }
-  }, []);
+  if (!items) return null;
+  return (
+    <ul>
+      {items?.map((item, index) => {
+        const id = item.url?.slice(1);
+        return (
+          <li key={item.title + index}>
+            <a href={item.url} className={cx({ [styles.active]: activeId === id })}>
+              {item.title}
+            </a>
+            <NavMenu items={item.items} activeId={activeId} />
+          </li>
+        );
+      })}
+    </ul>
+  );
+};
+
+const NavigationBar: React.FC<NavigationBarProps> = (props) => {
+  const { items } = props;
+  const [activeId, setActiveId] = useState('');
 
   useEffect(() => {
-    if (rootRef.current && list) {
-      createTreeUi(list, rootRef.current, 2);
-    }
-  }, [createTreeUi, list]);
+    const onScroll = () => {
+      const headNode = document.querySelectorAll('h2, h3, h4, h5');
+      const activeEl = Array.from(headNode).find((el) => {
+        const elTop = (el as HTMLHeadingElement).getBoundingClientRect().top + window.scrollY;
+        return elTop > window.scrollY;
+      });
 
-  return <div className={styles.root} ref={rootRef}></div>;
+      if (activeEl) {
+        setActiveId(activeEl.id);
+      }
+    };
+    window.addEventListener('scroll', onScroll);
+    return () => window.removeEventListener('scroll', onScroll);
+  }, []);
+
+  return (
+    <div className={styles.root}>
+      <NavMenu items={items} activeId={activeId} />
+    </div>
+  );
 };
 
 export default NavigationBar;

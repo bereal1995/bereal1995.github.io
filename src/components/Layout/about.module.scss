@@ -1,12 +1,10 @@
-
-$primary: #00852FFF;
 .container {
   max-width: 750px;
   padding: 1.5rem;
   margin: 0 auto;
 
   h1 {
-    border-left: 12px solid $primary;
+    border-left: 12px solid var(--hh-primary-color);
     padding-left: 8px;
     padding-bottom: 0px;
     margin-top: 2em;
@@ -26,7 +24,7 @@ $primary: #00852FFF;
       width: 12px;
       height: 12px;
       border-radius: 50%;
-      background-color: $primary;
+      background-color: var(--hh-primary-color);
       content: '';
     }
   }
@@ -36,9 +34,9 @@ $primary: #00852FFF;
   }
   
   code {
-    color: $primary;
+    color: var(--hh-primary-color);
     padding: 2px;
-    border: 1.4px solid $primary;
+    border: 1.4px solid var(--hh-primary-color);
     border-radius: 5px;
   }
 }

@@ -6,3 +6,11 @@ a {
   text-decoration: none;
   color: #000;
 }
+a:hover, a:active, a.active {
+  color: var(--hh-primary-color);
+}
+
+:root {
+  --hh-primary-color: #00852FFF;
+  --hh-tool-color: #ccc;
+}

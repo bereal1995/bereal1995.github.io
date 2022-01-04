@@ -38,13 +38,10 @@ type mdxType = {
   parent: {
     modifiedTime: any;
   };
-  mdxAST: {
-    children: {
-      type: string;
-      value: string;
-    }[];
-  };
+  tableOfContents: { items: tableOfContents };
 };
+
+type tableOfContents = { url: string; title: string; items?: tableOfContents }[];
 
 export type queryTypes = {
   site: siteType;
@@ -53,6 +50,7 @@ export type queryTypes = {
     posts: postsType;
   };
   file: fileType;
+  nullThumb: fileType;
   avatar: fileType;
   mdx: mdxType;
 };

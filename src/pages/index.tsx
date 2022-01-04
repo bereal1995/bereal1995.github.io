@@ -39,7 +39,7 @@ const Home: React.FC<HomeProps> = (props) => {
       <Header avatar={data.avatar} />
       <PageLayout>
         <CategoryList categories={categories} category={category} setCategory={onClickCategory} />
-        <PostList posts={posts} thumbnailNull={data.file.childImageSharp} />
+        <PostList posts={posts} thumbnailNull={data.nullThumb.childImageSharp} />
       </PageLayout>
     </>
   );
@@ -57,7 +57,7 @@ export const query = graphql`
         name
       }
     }
-    file(relativePath: { eq: "thumb/thumb_null.png" }) {
+    nullThumb: file(relativePath: { eq: "thumb/thumb_null.png" }) {
       childImageSharp {
         gatsbyImageData(width: 800)
       }

@@ -1,4 +1,6 @@
 .root {
+  display: flex;
+  justify-content: center;
   position: relative;
   max-width: 750px;
   padding: 0 1rem;
@@ -22,7 +24,8 @@
 .date {
   position: absolute;
   right: 0;
-  top: 50%;
+  bottom: 5%;
+  color: var(--hh-tool-color);
 }
 
 .thumb {
