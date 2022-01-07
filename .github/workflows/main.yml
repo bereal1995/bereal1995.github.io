@@ -2,7 +2,7 @@ name: gatsby deploy
 
 on:
   push:
-    branches: [dev]
+    branches: [live]
 
 jobs:
   deploy:
