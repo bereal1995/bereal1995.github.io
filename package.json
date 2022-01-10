@@ -23,6 +23,7 @@
     "classnames": "^2.3.1",
     "gatsby": "^4.3.0",
     "gatsby-image": "^3.11.0",
+    "gatsby-mdx-fix": "0.0.3",
     "gatsby-plugin-google-analytics": "^4.2.0",
     "gatsby-plugin-graphql-codegen": "^3.1.0",
     "gatsby-plugin-image": "^2.3.0",

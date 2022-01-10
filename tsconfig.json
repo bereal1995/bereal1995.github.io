@@ -22,7 +22,7 @@
     "baseUrl": "src",
   },
   "include": [
-    "src",
+    "src", "content/post/breakout-game/BreakOut",
   ],
   "exclude": [
     "node_modules"
