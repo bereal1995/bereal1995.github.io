@@ -26,22 +26,31 @@ const BreakOut: React.FC<BreakOutProps> = (props) => {
   // eslint-disable-next-line prefer-const
   let bricks = Array.from(Array(brickColumnCount), () => new Array(brickRowCount).fill({ x: 0, y: 0 }));
 
-  const drawBricks = (ctx: CanvasRenderingContext2D) => {
-    for (let i = 0; i < brickColumnCount; i++) {
-      for (let j = 0; j < brickRowCount; j++) {
-        const brickX = i * (brickWidth + brickPadding) + brickOffsetLeft;
-        const brickY = j * (brickHeight + brickPadding) + brickOffsetTop;
-        bricks[i][j].x = brickX;
-        bricks[i][j].y = brickY;
-        ctx.beginPath();
-        ctx.rect(brickX, brickY, brickWidth, brickHeight);
-        ctx.fillStyle = '#0095DD';
-        ctx.fill();
-        ctx.closePath();
+  /**
+   * @name 벽돌생성 함수
+   */
+  const drawBricks = useCallback(
+    (ctx: CanvasRenderingContext2D) => {
+      for (let i = 0; i < brickColumnCount; i++) {
+        for (let j = 0; j < brickRowCount; j++) {
+          const brickX = i * (brickWidth + brickPadding) + brickOffsetLeft;
+          const brickY = j * (brickHeight + brickPadding) + brickOffsetTop;
+          bricks[i][j].x = brickX;
+          bricks[i][j].y = brickY;
+          ctx.beginPath();
+          ctx.rect(brickX, brickY, brickWidth, brickHeight);
+          ctx.fillStyle = '#0095DD';
+          ctx.fill();
+          ctx.closePath();
+        }
       }
-    }
-  };
+    },
+    [bricks],
+  );
 
+  /**
+   * @name 키감지 함수
+   */
   const keyDown = (e: React.KeyboardEvent<HTMLDivElement>) => {
     if (e.key === 'ArrowRight') {
       rightPressed.current = true;
@@ -49,6 +58,9 @@ const BreakOut: React.FC<BreakOutProps> = (props) => {
       leftPressed.current = true;
     }
   };
+  /**
+   * @name 키감지 함수
+   */
   const keyUp = (e: React.KeyboardEvent<HTMLDivElement>) => {
     if (e.key === 'ArrowRight') {
       rightPressed.current = false;
@@ -57,6 +69,9 @@ const BreakOut: React.FC<BreakOutProps> = (props) => {
     }
   };
 
+  /**
+   * @name 패들생성함수
+   */
   const drawPaddle = (ctx: CanvasRenderingContext2D) => {
     if (!canvasRef.current) return;
 
@@ -67,6 +82,10 @@ const BreakOut: React.FC<BreakOutProps> = (props) => {
     ctx.closePath();
   };
 
+  /**
+   *
+   * @name 공 생성 함수
+   */
   const drawBall = (ctx: CanvasRenderingContext2D) => {
     ctx.beginPath();
     ctx.arc(x.current, y.current, ballRadius, 0, Math.PI * 2);
@@ -75,6 +94,9 @@ const BreakOut: React.FC<BreakOutProps> = (props) => {
     ctx.closePath();
   };
 
+  /**
+   * @name 렌더 함수
+   */
   const draw = useCallback(() => {
     if (!canvasRef.current) return;
     const canvas = canvasRef.current;
@@ -107,7 +129,7 @@ const BreakOut: React.FC<BreakOutProps> = (props) => {
     // 공 이동
     x.current += dx.current;
     y.current += dy.current;
-  }, []);
+  }, [drawBricks]);
 
   useEffect(() => {
     if (canvasRef.current) {

@@ -1,3 +1,9 @@
 .root {
+  display: flex;
+  justify-content: center;
   background: #fcf;
+
+  canvas {
+    background: #ffc;
+  }
 }
