@@ -37,6 +37,7 @@ h4 {
 td:first-child {
   text-align: right !important;
   font-weight: bolder !important;
+  white-space: nowrap;
 }
 
 th {
@@ -46,4 +47,3 @@ th {
 code {
   font-weight: 500 !important;
 }
-
