@@ -10,22 +10,7 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - name: checkout code
-        uses: actions/checkout@v3
-
-      - name: packages install
-        run: npm install
-
-      - name: gatsby build
-        run: npm run build
-        env:
-          # API_KEY 에는 자신이 secret을 생성할 때 설정한 이름으로 넣어야 한다
-          GH_API_KEY: ${{ secrets.TOKEN_HH }}
-
-      - name: deploy
-        uses: maxheld83/ghpages@v0.2.1
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          # API_KEY 에는 자신이 secret을 생성할 때 설정한 이름으로 넣어야 한다
-          GH_PAT: ${{ secrets.TOKEN_HH }}
-          BUILD_DIR: 'public/'
+      - uses: actions/checkout@v1
+      - uses: enriikke/gatsby-gh-pages-action@v2
+        with:
+          access-token: ${{ secrets.TOKEN_HH }}
