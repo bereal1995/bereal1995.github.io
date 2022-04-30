@@ -27,8 +27,8 @@
   padding-bottom: 50%;
   margin-bottom: 15px;
   border-radius: var(--post-border-radius);
-  > * {
-    position: absolute;
+  > div {
+    position: absolute !important;
     left: 0;
     top: 0;
     width: 100%;
