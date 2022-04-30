@@ -1,9 +1,9 @@
 import React from 'react';
 import * as styles from './post.module.scss';
-import { GatsbyImage } from 'gatsby-plugin-image';
 import NavigationBar from './../navigationBar/NavigationBar';
 import { getImage } from 'gatsby-plugin-image';
 import { queryTypes } from '../../types/dataType';
+import PostThumbnail from './../../components/post/PostThumbnail';
 
 type PostLayoutProps = {
   pageTitle?: string;
@@ -14,9 +14,7 @@ const PostLayout: React.FC<PostLayoutProps> = (props) => {
   const { children, data } = props;
 
   const frontmatter = data.mdx.frontmatter;
-  const imageData = frontmatter.featuredImage
-    ? getImage(frontmatter.featuredImage)
-    : getImage(data.nullThumb.childImageSharp);
+  const imageData = getImage(frontmatter.featuredImage);
 
   return (
     <div className={styles.root}>
@@ -25,7 +23,7 @@ const PostLayout: React.FC<PostLayoutProps> = (props) => {
           <h1 className={styles.title}>{frontmatter.title}</h1>
           <span className={styles.date}>{frontmatter.date}</span>
         </div>
-        {imageData && <GatsbyImage image={imageData} alt={'thumbnail'} className={styles.thumb} />}
+        <PostThumbnail title={frontmatter.title} imageData={imageData} />
         {children}
       </main>
       <NavigationBar items={data.mdx.tableOfContents.items} />

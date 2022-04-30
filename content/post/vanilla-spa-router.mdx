@@ -2,8 +2,9 @@
 title: '바닐라 자바스크립트 라우터 만들기'
 date: 2021-10-30
 category: '자바스크립트'
-featuredImage: '../images/thumb/thumb_vanilla-spa-router.png'
+# featuredImage: '../images/thumb/thumb_vanilla-spa-router.png'
 ---
+
 import { getImage, GatsbyImage } from 'gatsby-plugin-image';
 
 ## index.html 설정
@@ -24,30 +25,30 @@ import { getImage, GatsbyImage } from 'gatsby-plugin-image';
 ## router.js 설정
 
 ```javascript
-import home from './pages/home.js'
-import contract from './pages/contract.js'
-import about from './pages/about.js'
+import home from './pages/home.js';
+import contract from './pages/contract.js';
+import about from './pages/about.js';
 
 const routes = {
   '/': home,
   '/contract': contract,
   '/about': about,
-}
+};
 
-const initialRoutes = el => {
-  window.onpopstate = () => renderHTML(el, routes[window.location.pathname])
-}
+const initialRoutes = (el) => {
+  window.onpopstate = () => renderHTML(el, routes[window.location.pathname]);
+};
 
 const onNavigate = (pathname, el) => {
-  window.history.pushState({}, pathname, window.location.origin + pathname)
-  renderHTML(el, routes[pathname])
-}
+  window.history.pushState({}, pathname, window.location.origin + pathname);
+  renderHTML(el, routes[pathname]);
+};
 
 const renderHTML = (el, route) => {
-  el.innerHTML = route
-}
+  el.innerHTML = route;
+};
 
-export { routes, onNavigate, initialRoutes }
+export { routes, onNavigate, initialRoutes };
 ```
 
 - routes 객체를 만들고 경로값에 따라 컴포넌트를 설정해준다.
@@ -65,21 +66,21 @@ export { routes, onNavigate, initialRoutes }
 ## app.js 설정
 
 ```javascript
-import { routes, onNavigate, initialRoutes } from './router'
+import { routes, onNavigate, initialRoutes } from './router';
 
-const rootDiv = document.getElementById('root')
-const nav = document.querySelector('nav')
+const rootDiv = document.getElementById('root');
+const nav = document.querySelector('nav');
 
-rootDiv.innerHTML = routes[window.location.pathname]
+rootDiv.innerHTML = routes[window.location.pathname];
 
 window.onload = () => {
-  initialRoutes(rootDiv)
-  nav.addEventListener('click', e => {
-    e.preventDefault()
-    const pathname = e.target.getAttribute('data-route')
-    onNavigate(pathname, rootDiv)
-  })
-}
+  initialRoutes(rootDiv);
+  nav.addEventListener('click', (e) => {
+    e.preventDefault();
+    const pathname = e.target.getAttribute('data-route');
+    onNavigate(pathname, rootDiv);
+  });
+};
 ```
 
 - index.html에서 만든 네비게이션에 이벤트 위임을 통해 각각 링크들한테 click이벤트를 걸어준다.
@@ -87,7 +88,6 @@ window.onload = () => {
 ## 결과물
 
 ![무한스크롤](./../images/vanilla-spa-router/vanilla-spa-router01.gif)
-
 
 ## 참고자료
 

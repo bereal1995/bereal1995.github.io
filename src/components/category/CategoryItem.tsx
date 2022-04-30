@@ -1,5 +1,5 @@
 import React from 'react';
-import * as style from './CategoryItem.module.scss';
+import * as styles from './CategoryItem.module.scss';
 
 type CategoryItemProps = {
   title: string;
@@ -13,8 +13,10 @@ export const CategoryItem: React.FC<CategoryItemProps> = ({ title, onClick, isAc
   };
 
   return (
-    <li className={`${style.item} ${isActive ? style.active : ''}`}>
-      <div onClick={handleClick}>{title}</div>
+    <li className={`${styles.item} ${isActive ? styles.active : ''}`}>
+      <div className={styles.item_text} onClick={handleClick}>
+        {title}
+      </div>
     </li>
   );
 };

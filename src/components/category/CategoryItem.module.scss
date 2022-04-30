@@ -1,7 +1,17 @@
 .item {
   margin-right: 10px;
+  .item_text {
+    padding: 5px 10px;
+    box-shadow: 0 0 0 1px #000;
+    border-radius: 10px;
+    line-height: 1;
+    cursor: pointer;
+  }
 }
 
 .active {
   font-weight: bold;
+  .item_text {
+    box-shadow: 0 0 0 2px #000;
+  }
 }

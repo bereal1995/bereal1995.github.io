@@ -1,0 +1,17 @@
+.root {
+  margin-bottom: 10px;
+}
+.thumb_null {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  width: 100%;
+  height: 47.5vw;
+  max-height: 359px;
+  padding: 10px;
+  background: var(--hh-primary-color);
+  color: #fff;
+  font-size: 1.95rem;
+  font-weight: bold;
+}

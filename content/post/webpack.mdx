@@ -2,19 +2,23 @@
 title: '웹팩 직접 설정하기'
 date: 2021-09-06
 category: '자바스크립트'
-featuredImage: '../images/thumb/thumb_Webpack.png'
+# featuredImage: '../images/thumb/thumb_Webpack.png'
 ---
 
 ## 시작한 이유
+
 - 평소에는 react, vue등을 사용할 때에는 굳이 webpack을 설정하고 사용하는적이 매우 드물었다.
-- 그러던 와중에 프레임워크를 좀 더 이해하기 위해 바닐라자바스크립트로 SPA를 만들기를 도전 하던 중 webpack설정에 도전하게 되었다. 
+- 그러던 와중에 프레임워크를 좀 더 이해하기 위해 바닐라자바스크립트로 SPA를 만들기를 도전 하던 중 webpack설정에 도전하게 되었다.
 
 ## 웹팩이란
+
 - 웹팩이란 모듈 번들러이다.
 - 모듈 번들러란 웹 어플리케이션을 구성하는 자원들(HTML, css, js, images ...)을 각각의 모듈로 보고 이를 조합해서 병합된 하나의 결과물을 만드는 도구를 의미한다.
 
 ## 웹팩을 사용하는 이유
+
 웹팩이 등장한 이유는 크게 3가지이다.
+
 - 파일 단위의 자바스크립트 모듈 관리
 - 웹 개발 작업 자동화 도구
 - 웹 어플리케이션의 빠른 로딩속도와 높은 성능
@@ -22,26 +26,30 @@ featuredImage: '../images/thumb/thumb_Webpack.png'
 ## 웹팩 사용해보기
 
 ### 1. 웹팩 설치
+
 ```shell
 yarn add webpack webpack-cli --dev
 ```
 
 ### 2. index.html 추가
+
 ```html
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
   <head>
     <title>webpack Test</title>
   </head>
   <body>
     <div id="app"></div>
-      
-    <script type="module" src="./src/index.js"></script>\
+
+    <script type="module" src="./src/index.js"></script>
+    \
   </body>
 </html>
 ```
 
 ### 3. src 추가
+
 ```javascript
 // hello.js
 const word = 'Helloooooooo';
@@ -61,17 +69,20 @@ document.querySelector('#app').innerHTML = hello_word + ' ' + world_word
 ```
 
 ### 4. webpack.config.js 웹팩 설정하기
-- entry는 빌드를 시작할 때 최초 진입점이라고 생각하면 좋다.  
+
+- entry는 빌드를 시작할 때 최초 진입점이라고 생각하면 좋다.
 
 ```javascript
 module.exports = {
   entry: {
-    main: './src/index.js'
-  },  
-}
+    main: './src/index.js',
+  },
+};
 ```
+
 위 코드를 추가하면 웹팩이 실행될 때 index.js를 빌드한다.
-- output은 말그대로 웹팩 결과물 파일경로를 의미한다.  
+
+- output은 말그대로 웹팩 결과물 파일경로를 의미한다.
 
 ```javascript
 const path = require('path');
@@ -80,10 +91,10 @@ module.exports = {
     path: path.resolve('./dist'),
     filename: '[name].js',
   },
-}
+};
 ```
 
-- loader는 js파일이 아닌 웹 자원들을 변환 할 수 있게 도와주는 속성이다.  
+- loader는 js파일이 아닌 웹 자원들을 변환 할 수 있게 도와주는 속성이다.
 
 ```javascript
 module.exports = {
@@ -98,51 +109,56 @@ module.exports = {
         test: /\.css$/,
         use: ['style-loader', 'css-loader'],
       },
-    ]
+    ],
   },
-}
+};
 ```
-이 외에도 sass, file, ts loader 등등 자주 사용되는 로더들이 있다.
-사용하는 프로젝트에 필요한 로더가 있을 때 npm에서 다운받아 위 예시처럼 사용하면 된다.  
 
-- 로더는 웹팩 변환할 때 관여를 한다면, plugins는 플러그인 결과물 형태를 바꾸는 역할을 한다.  
+이 외에도 sass, file, ts loader 등등 자주 사용되는 로더들이 있다.
+사용하는 프로젝트에 필요한 로더가 있을 때 npm에서 다운받아 위 예시처럼 사용하면 된다.
+
+- 로더는 웹팩 변환할 때 관여를 한다면, plugins는 플러그인 결과물 형태를 바꾸는 역할을 한다.
 
 ```javascript
-const HtmlWebpackPlugin = require("html-webpack-plugin");
-const {CleanWebpackPlugin} = require("clean-webpack-plugin");
+const HtmlWebpackPlugin = require('html-webpack-plugin');
+const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 
 module.exports = {
   plugins: [
     new HtmlWebpackPlugin({
-      template: './index.html'
+      template: './index.html',
     }),
     new CleanWebpackPlugin(),
   ],
-}
+};
 ```
+
 위 예시 처럼 사용하면 되는데
 HtmlWebpackPlugin => 빌드한 결과물로 HTML 파일을 생성해주는 플러그인
 CleanWebpackPlugin => 빌드 이전 결과물을 제거하는 플러그인
+
 - devServer
-  - 웹팩을 dev서버에서 동작을 확인하기 위해 사용한다.  
+  - 웹팩을 dev서버에서 동작을 확인하기 위해 사용한다.
 
 ```javascript
 const path = require('path');
 
 module.exports = {
   devServer: {
-    host: "localhost", // 사용될 호르스트 설정
+    host: 'localhost', // 사용될 호르스트 설정
     port: 8080, // 접속 포트 설정
   },
-}
+};
 ```
+
 이렇게 설정하고
+
 ```shell
 npx webpack serve
 # http://localhost:8080 에서 확인이 가능하다!
 ```
 
-
 참고자료출처
+
 - https://joshua1988.github.io/webpack-guide/
 - https://webpack.js.org/guides/getting-started/

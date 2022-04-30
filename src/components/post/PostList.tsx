@@ -6,25 +6,26 @@ import { GatsbyImage, getImage } from 'gatsby-plugin-image';
 
 export type PostListProps = {
   posts: queryTypes['allMdx']['posts'];
-  thumbnailNull: queryTypes['file']['childImageSharp'];
 };
 
 const PostList: React.FC<PostListProps> = (props) => {
-  const { posts, thumbnailNull } = props;
-  const thumbnailNullImage = getImage(thumbnailNull);
+  const { posts } = props;
   return (
     <div className={styles.root}>
       <ul className={styles.post_list}>
         {posts.map((node) => {
-          const imageData = node.frontmatter.featuredImage
-            ? getImage(node.frontmatter.featuredImage)
-            : thumbnailNullImage;
-          const ImgEl = imageData && <GatsbyImage image={imageData} alt={'thumbnail'} />;
+          const imageData = getImage(node.frontmatter.featuredImage);
           return (
             <li key={node.id} className={styles.post_item}>
               <Link to={`post/${node.slug}`}>
                 <article>
-                  <div className={styles.post_thumb}>{ImgEl}</div>
+                  <div className={styles.post_thumb}>
+                    {imageData ? (
+                      <GatsbyImage image={imageData} alt={'thumbnail'} />
+                    ) : (
+                      <div className={styles.post_thumb_null}>{node.frontmatter.title}</div>
+                    )}
+                  </div>
                   <span className={styles.post_date}>작성: {node.frontmatter.date}</span>
                   <h2 className={styles.post_title}>{node.frontmatter.title}</h2>
                   <div className={styles.post_preview}>{node.excerpt}</div>

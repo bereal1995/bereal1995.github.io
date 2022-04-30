@@ -39,7 +39,7 @@ const Home: React.FC<HomeProps> = (props) => {
       <Header avatar={data.avatar} />
       <PageLayout>
         <CategoryList categories={categories} category={category} setCategory={onClickCategory} />
-        <PostList posts={posts} thumbnailNull={data.nullThumb.childImageSharp} />
+        <PostList posts={posts} />
       </PageLayout>
     </>
   );
