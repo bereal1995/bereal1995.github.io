@@ -1,5 +1,9 @@
 .root {
   display: block;
+  a {
+    display: block;
+    padding: 10px;
+  }
 }
 
 .post_list {
@@ -60,9 +64,9 @@
   margin-bottom: var(--post-mb);
   margin-top: 0;
   border: none;
-  font-size: 24px;
+  font-size: 18px;
   font-weight: bold;
-  line-height: 1.6;
+  line-height: 1.4;
   white-space: nowrap;
   text-overflow: ellipsis;
 }

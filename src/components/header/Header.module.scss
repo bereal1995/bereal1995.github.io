@@ -6,6 +6,7 @@
 
 .top {
   display: flex;
+  align-items: center;
   justify-content: space-between;
   height: 60px;
 }
@@ -25,4 +26,7 @@
   align-items: center;
   height: 100%;
   list-style: none;
+  li {
+    margin-left: 4px;
+  }
 }
