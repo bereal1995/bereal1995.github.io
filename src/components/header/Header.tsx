@@ -26,7 +26,7 @@ const Header: React.FC<HeaderProps> = ({ pageTitle, children, title, avatar }) =
               <a href="https://github.com/bereal1995">Github</a>
             </li>
             <li>
-              <Link to="/about/resume">About</Link>
+              <a href="https://ebony-flock-5ad.notion.site/c6b823ce54ce44a1a61597f0f9d68869">About</a>
             </li>
           </ul>
         </nav>
