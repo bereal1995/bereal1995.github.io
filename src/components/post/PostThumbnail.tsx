@@ -13,7 +13,7 @@ const PostThumbnail: React.FC<PostThumbnailProps> = (props) => {
   return (
     <div className={styles.root}>
       {imageData ? (
-        <GatsbyImage image={imageData} alt={'thumbnail'} className={styles.thumb} />
+        <GatsbyImage image={imageData} alt={'thumbnail'} />
       ) : (
         <div className={styles.thumb_null}>{title}</div>
       )}

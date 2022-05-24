@@ -62,7 +62,6 @@ module.exports = {
           'gatsby-remark-copy-linked-files', // gif 사용하기 위해 추가
           `gatsby-remark-autolink-headers`, // h태그 id 추가
         ],
-        plugins: [`gatsby-remark-images`],
       },
     },
     {

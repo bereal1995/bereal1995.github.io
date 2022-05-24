@@ -1,0 +1,56 @@
+---
+title: 'intersectionObserver iframe 이슈'
+date: 2022-05-24
+category: 'javascript'
+# featuredImage: '../images/thumb/thumb_Data_Type.png'
+---
+
+> 회사에서 업무를 하다가 [intersectionObserver API](https://developer.mozilla.org/ko/docs/Web/API/Intersection_Observer_API)을 활용하여 기능을 구현하는 부분에서  
+> iOS iframe환경에서 제대로 동작하는 이슈가 발생했다.
+
+## 문제
+
+<iframe
+  height="300"
+  style="width: 100%;"
+  scrolling="no"
+  title="Untitled"
+  src="https://codepen.io/bereal1995/embed/vYderVM?default-tab=html%2Cresult"
+  frameborder="no"
+  loading="lazy"
+  allowtransparency="true"
+>
+  See the Pen <a href="https://codepen.io/bereal1995/pen/vYderVM">Untitled</a> by HH (
+  <a href="https://codepen.io/bereal1995">@bereal1995</a>) on <a href="https://codepen.io">CodePen</a>.
+</iframe>
+
+- iOS 환경에서 확인하실 경우 observe되는 경우에도 alert이 실행되지 않는것을 볼 수 있다.
+
+## 수정된 버전
+
+<iframe
+  height="300"
+  style="width: 100%;"
+  scrolling="no"
+  title="Untitled"
+  src="https://codepen.io/bereal1995/embed/bGLojEB?default-tab=html%2Cresult"
+  frameborder="no"
+  loading="lazy"
+  allowtransparency="true"
+>
+  See the Pen <a href="https://codepen.io/bereal1995/pen/bGLojEB">Untitled</a> by HH (
+  <a href="https://codepen.io/bereal1995">@bereal1995</a>) on <a href="https://codepen.io">CodePen</a>.
+</iframe>
+
+## 원인
+
+```javascript
+const options = {
+  root: document,
+  rootMargin: '0px',
+  threshold: 1.0,
+};
+```
+
+- root 값은 대상 객체의 가시성을 확인할 때 사용되는 뷰포트 요소이다.
+- 원인은 root값을 따로 설정안해주면 API문서에서는 기본값은 브라우저 뷰포트 기반으로 움직인다고 설명되어있지만 막상 설정을 해주지 않으면 iOS iframe환경에서는 entry.isIntersecting 값이 true로 넘어 오지 않는다.
