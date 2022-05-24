@@ -7,6 +7,10 @@
   margin: 0 auto;
   a {
     padding: 0;
+    color: #bbb;
+    &:hover {
+      color: var(--hh-primary-color);
+    }
   }
   main {
     width: 100%;
@@ -16,7 +20,7 @@
 .header {
   position: relative;
   padding: 10px 0;
-  margin: 20px 0 10px;
+  margin: 0 0 10px;
   border-bottom: 1px solid #000;
 }
 

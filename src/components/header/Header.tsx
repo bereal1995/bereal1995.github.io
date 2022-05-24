@@ -16,9 +16,9 @@ const Header: React.FC<HeaderProps> = ({ pageTitle, children, title, avatar }) =
     <header className={styles.container}>
       <div className={styles.top}>
         <div className={styles.logo}>
-          <h1>
+          <div>
             <Link to="/">HH Blog</Link>
-          </h1>
+          </div>
         </div>
         <nav>
           <ul className={styles.nav}>
