@@ -3,7 +3,7 @@ node_js:
   - 18
 branches:
   only:
-    - main
+    - master
 cache:
   yarn: true
 script:
