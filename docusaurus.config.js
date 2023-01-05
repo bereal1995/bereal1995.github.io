@@ -7,7 +7,7 @@ const darkCodeTheme = require('prism-react-renderer/themes/dracula');
 /** @type {import('@docusaurus/types').Config} */
 const config = {
   title: 'HH Docs',
-  tagline: '책을 읽고 정리한 내용입니다.',
+  tagline: '공부한 내용을 정리하는 공간입니다.',
   url: 'https://bereal1995.github.io',
   baseUrl: '/',
   onBrokenLinks: 'throw',
@@ -55,16 +55,16 @@ const config = {
     ],
   ],
   plugins: [
-    // [
-    //   '@docusaurus/plugin-content-docs',
-    //   {
-    //     id: 'community',
-    //     path: 'community',
-    //     routeBasePath: 'community',
-    //     sidebarPath: require.resolve('./sidebars.js'),
-    //     // ... other options
-    //   },
-    // ],
+    [
+      '@docusaurus/plugin-content-docs',
+      {
+        id: 'community',
+        path: 'community',
+        routeBasePath: 'community',
+        sidebarPath: require.resolve('./sidebars.js'),
+        // ... other options
+      },
+    ],
   ],
 
   themeConfig:
@@ -81,11 +81,11 @@ const config = {
             type: 'doc',
             docId: 'intro',
             position: 'left',
-            label: 'js Deep Dive',
+            label: '자바스크립트의 모든 것',
           },
           // {
           //   to: '/community/Intro', // ./community/Intro.md
-          //   label: 'js Deep Dive2',
+          //   label: 'JS Deep Dive',
           //   position: 'left',
           //   activeBaseRegex: `/community/`,
           // },
@@ -104,8 +104,8 @@ const config = {
             title: 'Docs',
             items: [
               {
-                label: '모던 자바스크립트 Deep Dive',
-                to: '/docs/intro',
+                label: '자바스크립트의 모든 것',
+                to: '/docs/js-all/intro',
               },
             ],
           },
