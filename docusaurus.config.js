@@ -105,7 +105,7 @@ const config = {
             items: [
               {
                 label: '자바스크립트의 모든 것',
-                to: '/docs/js-all/intro',
+                to: '/docs/intro',
               },
             ],
           },
